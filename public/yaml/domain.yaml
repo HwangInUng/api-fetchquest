@@ -1,11 +1,25 @@
 domains:
-  - name: sensor
+  - name: sensor-학습관리
     categories:
-      - name: 학습관리
-      - name: 모니터링 관리
-  - name: map
+      - name: 공정코드 관리
+        methods:
+          - name: saveProcessCode()
+            method: post
+          - name: getLearnList()
+            method: get
+          - name: removeSensor()
+            method: delete
+      - name: 센서그룹 관리
+        methods:
+          - name: getLearnList()
+            method: post
+      - name: 수집데이터 조회
+      - name: 불량정보 관리
+      - name: 학습처리
+  - name: sensor-모니터링 관리
     categories:
-      - category1:
-          name: 학습 관리
-      - category2:
-          name: 모니터링 관리
+      - name: 모니터링 설정
+      - name: 시스템 현황
+      - name: 실시간 모니터링
+      - name: 데이터 분석1
+      - name: 데이터 분석2

@@ -1,15 +1,13 @@
 import yaml from "js-yaml";
+import { IData } from "models";
 
-interface IData {
-  domains: IDomain[];
-}
-interface IDomain {
-  name: string;
-  categories: object[];
+export async function fetchDomain() {
+  const response = await fetch("./yaml/domain.yaml");
+  return response.text();
 }
 
-export function parsingYaml() {
-  const yamlText = "";
+export function parsingYaml(yamlText: string) {
   const parseData = yaml.load(yamlText) as IData;
-  const jsonData = JSON.stringify(parseData, null, 2);
+  // const jsonData = JSON.stringify(parseData, null, 2);
+  return parseData;
 }

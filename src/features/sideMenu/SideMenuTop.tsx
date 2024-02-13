@@ -1,6 +1,6 @@
 import { SideLogo } from "assets";
 import { BiSearchAlt } from "react-icons/bi";
-import { SideTopBox } from "./sideMenuStyels";
+import { SideTopBox } from "./sideMenuStyles";
 
 const SideMenuTop = () => {
   return (
