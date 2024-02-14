@@ -1,34 +1,22 @@
-import { SideUl } from "./sideMenuStyles";
+import { SideListBox, SideUl } from "./sideMenuStyles";
 import SideCategory from "./SideCategory";
-import { useEffect, useState } from "react";
-import { fetchDomain, parsingYaml } from "utils/yamlHelper";
-import { IDomain } from "models";
+import { useRecoilValue } from "recoil";
+import { sideMenuState } from "atoms";
 
 const SideList = () => {
-  const [domains, setDomains] = useState<Array<IDomain>>();
-
-  useEffect(() => {
-    const fetchDomainData = async () => {
-      const yamlText = await fetchDomain();
-      const parseData = parsingYaml(yamlText);
-      setDomains(parseData.domains);
-    };
-
-    fetchDomainData();
-  }, []);
+  const domains = useRecoilValue(sideMenuState.sideMenus);
 
   return (
-    <div>
+    <SideListBox>
       <SideUl>
-        {domains &&
-          domains.map((domain) => (
-            <li key={domain.name} className="side-title">
-              <div className="title-box">{domain.name}</div>
-              <SideCategory categories={domain.categories} />
-            </li>
-          ))}
+        {domains.map((domain) => (
+          <li key={domain.name} className="side-title">
+            <div className="title-box">{domain.name}</div>
+            <SideCategory categories={domain.categories} />
+          </li>
+        ))}
       </SideUl>
-    </div>
+    </SideListBox>
   );
 };
 

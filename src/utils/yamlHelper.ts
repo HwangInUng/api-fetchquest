@@ -1,13 +1,24 @@
 import yaml from "js-yaml";
-import { IData } from "models";
+import { IDomainList } from "models";
 
 export async function fetchDomain() {
   const response = await fetch("./yaml/domain.yaml");
   return response.text();
 }
 
-export function parsingYaml(yamlText: string) {
-  const parseData = yaml.load(yamlText) as IData;
-  // const jsonData = JSON.stringify(parseData, null, 2);
-  return parseData;
+export function parsingDomain(yamlText: string) {
+  const parseData = yaml.load(yamlText) as IDomainList;
+  const domains = parseData.domains;
+  const methodList = domains.flatMap((domain) =>
+    domain.categories.flatMap((category) => {
+      if (category.methods) {
+        return category.methods.flatMap((method) => ({
+          ...method,
+          upperCode: category.code,
+        }));
+      }
+      return [];
+    })
+  );
+  return { domains, methodList };
 }

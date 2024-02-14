@@ -1,15 +1,14 @@
 import tw from "twin.macro";
 import styled from "styled-components";
 
-type containerWidth = { width: number };
-
-export const SideMenuContainer = styled.div<containerWidth>`
-  width: ${({ width }) => width}px;
+export const SideMenuContainer = styled.div`
   box-shadow: 0 0 7px rgba(23, 37, 84, 0.6);
-
   ${tw`
     bg-slate-50
+    w-[250px]
     h-full
+    flex
+    flex-col
     rounded-r-lg
     overflow-hidden
   `}
@@ -17,6 +16,7 @@ export const SideMenuContainer = styled.div<containerWidth>`
 
 export const SideTopBox = styled.div`
   ${tw`
+    flex-shrink-0
     bg-blue-950
   `}
 
@@ -38,9 +38,11 @@ export const SideTopBox = styled.div`
 
   .search-box {
     ${tw`
-      h-[40px]
+      relative
+      h-[50px]
       flex
       justify-center
+      items-center
       py-1
       px-2
     `}
@@ -48,6 +50,7 @@ export const SideTopBox = styled.div`
 
   .search-field {
     ${tw`
+      h-[80%]
       w-[90%]
       flex
       items-center
@@ -79,17 +82,24 @@ export const SideTopBox = styled.div`
   }
 `;
 
+export const SideListBox = styled.div`
+  ${tw`
+    overflow-y-auto
+    flex-grow
+  `}
+`;
+
 export const SideUl = styled.ul`
   ${tw`
     flex
     flex-col
     gap-y-1
     py-1
+    text-[0.8rem]
   `}
 
   .side-title {
     ${tw`
-      text-sm
       text-slate-500
     `}
     .title-box {
@@ -127,14 +137,20 @@ export const SideUl = styled.ul`
       gap-x-2
       cursor-pointer
       text-slate-600
-      text-[0.9rem]
       ml-6
       mr-3
       mb-4
       hover:border-blue-600
       border-r-2
       border-slate-50
+      transform
+      duration-200
     `}
+    &.select {
+      ${tw`
+        border-blue-600
+      `}
+    }
 
     .method-type {
       ${tw`
@@ -148,5 +164,29 @@ export const SideUl = styled.ul`
         w-[2rem]
       `}
     }
+  }
+`;
+
+export const SideSearchListBox = styled.div<{ $hasData: boolean }>`
+  ${tw`
+    bg-neutral-200
+    transform
+    duration-150
+    flex
+    flex-col
+    gap-y-1
+    overflow-y-auto
+  `}
+
+  ${({ $hasData }) => ($hasData ? tw`h-0` : tw`h-[120px]`)}
+
+  .search-item {
+    ${tw`
+      px-4
+      py-0.5
+      cursor-pointer
+      text-[0.9rem]
+      hover:bg-neutral-100
+    `}
   }
 `;

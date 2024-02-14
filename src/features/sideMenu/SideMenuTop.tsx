@@ -1,6 +1,6 @@
 import { SideLogo } from "assets";
-import { BiSearchAlt } from "react-icons/bi";
 import { SideTopBox } from "./sideMenuStyles";
+import SideMenuSearch from "./SideMenuSearch";
 
 const SideMenuTop = () => {
   return (
@@ -10,14 +10,7 @@ const SideMenuTop = () => {
           <img src={SideLogo} alt="SideLogo" />
         </a>
       </div>
-      <div className="search-box">
-        <div className="search-field">
-          <input placeholder="Search" />
-          <button>
-            <BiSearchAlt />
-          </button>
-        </div>
-      </div>
+      <SideMenuSearch />
     </SideTopBox>
   );
 };

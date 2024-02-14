@@ -1,6 +1,7 @@
 export interface ISideMethod {
   name: string;
   method: "get" | "post" | "put" | "delete";
+  upperCode: string;
   // url?: string;
 }
 
@@ -9,6 +10,7 @@ export interface ISideMethodProps {
 }
 
 export interface ISideCategory {
+  code: string;
   name: string;
   methods?: Array<ISideMethod>;
 }
@@ -17,7 +19,7 @@ export interface ISideCategoryProps {
   categories: Array<ISideCategory>;
 }
 
-export interface IData {
+export interface IDomainList {
   domains: Array<IDomain>;
 }
 

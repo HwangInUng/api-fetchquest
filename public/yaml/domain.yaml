@@ -2,6 +2,7 @@ domains:
   - name: sensor-학습관리
     categories:
       - name: 공정코드 관리
+        code: AIBI040M01
         methods:
           - name: saveProcessCode()
             method: post
@@ -10,16 +11,25 @@ domains:
           - name: removeSensor()
             method: delete
       - name: 센서그룹 관리
+        code: AILM020M01
         methods:
-          - name: getLearnList()
+          - name: getLearnList2()
             method: post
       - name: 수집데이터 조회
+        code: AILM010M01
       - name: 불량정보 관리
+        code: AILM060M01
       - name: 학습처리
+        code: AILM050M01
   - name: sensor-모니터링 관리
     categories:
       - name: 모니터링 설정
+        code: AIPM060M01
       - name: 시스템 현황
+        code: AIPM010M01
       - name: 실시간 모니터링
+        code: AIPM020M01
       - name: 데이터 분석1
+        code: AIPM030M01
       - name: 데이터 분석2
+        code: AIPM040M01

@@ -1,38 +1,34 @@
 import { BiSolidChevronRight } from "react-icons/bi";
 import SideMethod from "./SideMethod";
-import { useState } from "react";
 import { ISideCategoryProps } from "models";
+import { useRecoilState } from "recoil";
+import { sideMenuState } from "atoms";
 
 const SideCategory = ({ categories }: ISideCategoryProps): JSX.Element => {
-  const [selectCategory, setSelectCategory] = useState("");
-  const isSelect = (categoryName: string) => {
-    return selectCategory === categoryName;
-  };
-  const handleSelectCategory = (categoryName: string) => {
-    if (categoryName === selectCategory) {
-      setSelectCategory("");
-    } else {
-      setSelectCategory(categoryName);
-    }
+  const [selectCategory, setSelectCategory] = useRecoilState(
+    sideMenuState.selectSideCategory
+  );
+  const isSelect = (categoryCode: string) => {
+    return selectCategory === categoryCode;
   };
 
   return (
     <div>
       {categories.map((category) => (
-        <div key={category.name}>
+        <div key={category.code}>
           <div
             className={`
               side-category
-              ${isSelect(category.name) && "bg-slate-200"}
+              ${isSelect(category.code) && "bg-slate-200"}
             `}
-            onClick={() => handleSelectCategory(category.name)}
+            onClick={() => setSelectCategory(category.code)}
           >
             <span>{category.name}</span>
             <BiSolidChevronRight
-              className={`${isSelect(category.name) && "rotate-90"}`}
+              className={`${isSelect(category.code) && "rotate-90"}`}
             />
           </div>
-          {isSelect(category.name) && <SideMethod methods={category.methods} />}
+          {isSelect(category.code) && <SideMethod methods={category.methods} />}
         </div>
       ))}
     </div>

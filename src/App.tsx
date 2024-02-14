@@ -1,10 +1,13 @@
 import Home from "pages/Home";
+import { RecoilRoot } from "recoil";
 
 function App(): JSX.Element {
   return (
-    <div className="App">
-      <Home />
-    </div>
+    <RecoilRoot>
+      <div className="App">
+        <Home />
+      </div>
+    </RecoilRoot>
   );
 }
 
