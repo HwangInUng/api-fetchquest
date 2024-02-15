@@ -1,6 +1,5 @@
 import { sideMenuState } from "atoms";
-import { SideMenu } from "features";
-import ContentArea from "components/ContentArea";
+import { Content, SideMenu } from "features";
 import { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { fetchDomain, parsingDomain } from "utils/yamlHelper";
@@ -34,7 +33,7 @@ const Home = () => {
   return (
     <div className="flex h-screen w-screen">
       <SideMenu />
-      <ContentArea />
+      <Content />
     </div>
   );
 };

@@ -15,3 +15,14 @@ export const LoadingBox = styled.div`
     height: 100px;
   }
 `;
+
+export const ContentContainer = styled.div`
+  ${tw`
+    flex
+    flex-col
+    h-full
+    flex-grow
+    pl-2
+    overflow-y-scroll
+  `}
+`;
