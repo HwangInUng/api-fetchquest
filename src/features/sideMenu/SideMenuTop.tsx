@@ -1,6 +1,6 @@
 import { SideLogo } from "assets";
-import { SideTopBox } from "./sideMenuStyles";
 import SideMenuSearch from "./SideMenuSearch";
+import { SideTopBox } from "styles";
 
 const SideMenuTop = () => {
   return (

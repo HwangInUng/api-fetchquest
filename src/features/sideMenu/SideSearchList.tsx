@@ -1,19 +1,16 @@
 import { sideMenuState } from "atoms";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { SideSearchListBox } from "./sideMenuStyles";
+import { useRecoilState } from "recoil";
 import { ISideMethod } from "models";
+import { SideSearchListBox } from "styles";
 
 const SideSearchList = () => {
-  const searchMethodList = useRecoilValue(sideMenuState.searchMethodList);
+  const [searchMethodList, resetSearchMethodList] = useRecoilState(
+    sideMenuState.searchMethodList
+  );
   const hasData = searchMethodList.length === 0;
-  const setSearchMethod = useSetRecoilState(sideMenuState.searchMethod);
-  const setSelectCategory = useSetRecoilState(sideMenuState.selectSideCategory);
-  const setSelectMethod = useSetRecoilState(sideMenuState.selectSideMethod);
 
   const handleSelect = (target: ISideMethod) => {
-    setSelectCategory(target.upperCode);
-    setSelectMethod(target.name);
-    setSearchMethod("");
+    resetSearchMethodList([target]);
   };
 
   return (

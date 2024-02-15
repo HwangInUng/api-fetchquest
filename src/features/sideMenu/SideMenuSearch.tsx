@@ -1,6 +1,6 @@
 import { sideMenuState } from "atoms";
 import { useInputValue } from "hooks";
-import { useEffect } from "react";
+import { KeyboardEvent, useEffect } from "react";
 import { BiSearchAlt } from "react-icons/bi";
 import { useSetRecoilState } from "recoil";
 
@@ -8,7 +8,12 @@ const SideMenuSearch = () => {
   const setSearchMethod = useSetRecoilState(sideMenuState.searchMethod);
   const [inputValue, setInputValue] = useInputValue("");
 
-  const handleSearch = () => {
+  const handleClick = () => {
+    setSearchMethod(inputValue);
+  };
+
+  const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key !== "Enter") return;
     setSearchMethod(inputValue);
   };
 
@@ -23,9 +28,10 @@ const SideMenuSearch = () => {
           type="text"
           value={inputValue}
           onChange={setInputValue}
+          onKeyDown={handleEnter}
           placeholder="Search"
         />
-        <button onClick={handleSearch}>
+        <button onClick={handleClick}>
           <BiSearchAlt />
         </button>
       </div>

@@ -1,5 +1,5 @@
+import { SideMenuContainer } from "styles";
 import SideList from "./SideList";
-import { SideMenuContainer } from "./sideMenuStyles";
 import SideMenuTop from "./SideMenuTop";
 import SideSearchList from "./SideSearchList";
 

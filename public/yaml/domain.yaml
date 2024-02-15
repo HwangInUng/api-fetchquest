@@ -1,5 +1,6 @@
 domains:
   - name: sensor-학습관리
+    code: sensor-learn
     categories:
       - name: 공정코드 관리
         code: AIBI040M01
@@ -22,6 +23,7 @@ domains:
       - name: 학습처리
         code: AILM050M01
   - name: sensor-모니터링 관리
+    code: sensor-monitor
     categories:
       - name: 모니터링 설정
         code: AIPM060M01

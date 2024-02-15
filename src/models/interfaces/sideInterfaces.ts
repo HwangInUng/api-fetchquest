@@ -2,6 +2,7 @@ export interface ISideMethod {
   name: string;
   method: "get" | "post" | "put" | "delete";
   upperCode: string;
+  upperName: string;
   // url?: string;
 }
 
@@ -12,6 +13,8 @@ export interface ISideMethodProps {
 export interface ISideCategory {
   code: string;
   name: string;
+  upperCode: string;
+  upperName: string;
   methods?: Array<ISideMethod>;
 }
 
@@ -25,5 +28,6 @@ export interface IDomainList {
 
 export interface IDomain {
   name: string;
+  code: string;
   categories: Array<ISideCategory>;
 }

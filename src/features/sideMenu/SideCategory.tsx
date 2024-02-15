@@ -3,6 +3,7 @@ import SideMethod from "./SideMethod";
 import { ISideCategoryProps } from "models";
 import { useRecoilState } from "recoil";
 import { sideMenuState } from "atoms";
+import { SideCategoryBox } from "styles";
 
 const SideCategory = ({ categories }: ISideCategoryProps): JSX.Element => {
   const [selectCategory, setSelectCategory] = useRecoilState(
@@ -16,18 +17,15 @@ const SideCategory = ({ categories }: ISideCategoryProps): JSX.Element => {
     <div>
       {categories.map((category) => (
         <div key={category.code}>
-          <div
-            className={`
-              side-category
-              ${isSelect(category.code) && "bg-slate-200"}
-            `}
+          <SideCategoryBox
+            $isSelect={isSelect(category.code)}
             onClick={() => setSelectCategory(category.code)}
           >
             <span>{category.name}</span>
             <BiSolidChevronRight
               className={`${isSelect(category.code) && "rotate-90"}`}
             />
-          </div>
+          </SideCategoryBox>
           {isSelect(category.code) && <SideMethod methods={category.methods} />}
         </div>
       ))}

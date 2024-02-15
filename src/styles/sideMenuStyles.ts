@@ -107,75 +107,78 @@ export const SideUl = styled.ul`
       padding-bottom: 0;
     }
   }
+`;
 
-  .side-category {
+export const SideCategoryBox = styled.div<{ $isSelect: boolean }>`
+  ${tw`
+    cursor-pointer
+    hover:bg-slate-200
+    transform
+    duration-150
+    text-slate-950
+    flex
+    items-center
+    justify-between
+    p-2
+    pl-4
+  `}
+  ${({ $isSelect }) => ($isSelect ? tw`bg-slate-200` : null)}
+
+  svg {
     ${tw`
-      cursor-pointer
-      hover:bg-slate-200
       transform
       duration-150
-      text-slate-950
-      flex
-      items-center
-      justify-between
-      p-2
-      pl-4
     `}
-    svg {
-      ${tw`
-        transform
-        duration-150
-      `}
-    }
   }
+`;
 
-  .side-method {
+export const SideMethodBox = styled.div<{
+  $isSelect: boolean;
+  $typeColor: string;
+}>`
+  ${tw`
+    first:mt-2
+    flex
+    items-center
+    gap-x-2
+    cursor-pointer
+    text-slate-600
+    ml-6
+    mr-3
+    mb-4
+    hover:border-orange-600
+    border-r-2
+    border-slate-50
+    transform
+    duration-200
+  `}
+  ${({ $isSelect }) => ($isSelect ? tw`border-orange-600` : null)}
+
+  .method-type {
     ${tw`
-      first:mt-2
       flex
       items-center
-      gap-x-2
-      cursor-pointer
-      text-slate-600
-      ml-6
-      mr-3
-      mb-4
-      hover:border-blue-600
-      border-r-2
-      border-slate-50
-      transform
-      duration-200
+      justify-center
+      rounded-md
+      text-white
+      text-[0.6rem]
+      h-[1rem]
+      w-[2rem]
     `}
-    &.select {
-      ${tw`
-        border-blue-600
-      `}
-    }
 
-    .method-type {
-      ${tw`
-        flex
-        items-center
-        justify-center
-        rounded-md
-        text-white
-        text-[0.6rem]
-        h-[1rem]
-        w-[2rem]
-      `}
-    }
+    ${({ $typeColor }) => `background-color: ${$typeColor}`};
   }
 `;
 
 export const SideSearchListBox = styled.div<{ $hasData: boolean }>`
   ${tw`
-    bg-neutral-200
+    bg-slate-200
     transform
     duration-150
     flex
     flex-col
     gap-y-1
-    overflow-y-auto
+    overflow-auto
   `}
 
   ${({ $hasData }) => ($hasData ? tw`h-0` : tw`h-[120px]`)}
@@ -186,7 +189,7 @@ export const SideSearchListBox = styled.div<{ $hasData: boolean }>`
       py-0.5
       cursor-pointer
       text-[0.9rem]
-      hover:bg-neutral-100
+      hover:bg-slate-100
     `}
   }
 `;

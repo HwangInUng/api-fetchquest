@@ -1,6 +1,7 @@
 import { sideMenuState } from "atoms";
 import { ISideMethodProps } from "models";
 import { useRecoilState } from "recoil";
+import { SideMethodBox } from "styles";
 import { SIDE_METHOD_COLOR } from "utils/constants";
 
 const SideMethod = ({ methods = [] }: ISideMethodProps): JSX.Element => {
@@ -12,22 +13,15 @@ const SideMethod = ({ methods = [] }: ISideMethodProps): JSX.Element => {
   return (
     <div>
       {methods.map((method) => (
-        <div
+        <SideMethodBox
           key={method.name}
-          className={`
-            side-method
-            ${isSelect(method.name) && "select"}
-          `}
+          $isSelect={isSelect(method.name)}
+          $typeColor={SIDE_METHOD_COLOR[method.method]}
           onClick={() => setSelectMethod(method.name)}
         >
-          <span
-            className="method-type"
-            style={{ backgroundColor: SIDE_METHOD_COLOR[method.method] }}
-          >
-            {method.method}
-          </span>
+          <span className="method-type">{method.method}</span>
           <div>{method.name}</div>
-        </div>
+        </SideMethodBox>
       ))}
     </div>
   );

@@ -30,6 +30,16 @@ const searchMethodList = selector<ISideMethod[]>({
 
     return newMethodList;
   },
+  set: ({ get, set, reset }, newValue) => {
+    if (!Array.isArray(newValue)) return;
+
+    const target = newValue[0] as ISideMethod;
+
+    set(selectSideCategory, target.upperCode);
+    set(selectSideMethod, target.name);
+    reset(searchMethod);
+    reset(searchMethodList);
+  },
 });
 
 const currentCategory = atom({

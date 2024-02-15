@@ -1,10 +1,13 @@
 import { sideMenuState } from "atoms";
 import { SideMenu } from "features";
-import { useEffect } from "react";
+import ContentArea from "components/ContentArea";
+import { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { fetchDomain, parsingDomain } from "utils/yamlHelper";
+import Loading from "components/Loading";
 
 const Home = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const setSideMenus = useSetRecoilState(sideMenuState.sideMenus);
   const setSideMethodList = useSetRecoilState(sideMenuState.sideMethodList);
 
@@ -15,14 +18,23 @@ const Home = () => {
 
       setSideMenus(domains);
       setSideMethodList(methodList);
+      setIsLoading(false);
     };
 
     fetchSideMenus();
   }, []);
 
+  if (isLoading)
+    return (
+      <div className="h-screen">
+        <Loading />
+      </div>
+    );
+
   return (
     <div className="flex h-screen w-screen">
       <SideMenu />
+      <ContentArea />
     </div>
   );
 };

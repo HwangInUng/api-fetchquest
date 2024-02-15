@@ -1,7 +1,7 @@
-import { SideListBox, SideUl } from "./sideMenuStyles";
 import SideCategory from "./SideCategory";
 import { useRecoilValue } from "recoil";
 import { sideMenuState } from "atoms";
+import { SideListBox, SideUl } from "styles";
 
 const SideList = () => {
   const domains = useRecoilValue(sideMenuState.sideMenus);
