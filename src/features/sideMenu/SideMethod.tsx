@@ -2,13 +2,18 @@ import { sideMenuState } from "atoms";
 import { ISideMethodProps } from "models";
 import { useRecoilState } from "recoil";
 import { SideMethodBox } from "styles";
-import { SIDE_METHOD_COLOR } from "utils/constants";
+import { SIDE_METHOD_COLOR, onMoveToScroll } from "utils";
 
 const SideMethod = ({ methods = [] }: ISideMethodProps): JSX.Element => {
   const [selectMethod, setSelectMethod] = useRecoilState(
     sideMenuState.selectSideMethod
   );
   const isSelect = (targetName: string) => selectMethod === targetName;
+
+  const handleClick = (methodName: string) => {
+    onMoveToScroll(methodName);
+    setSelectMethod(methodName);
+  };
 
   return (
     <div>
@@ -17,7 +22,7 @@ const SideMethod = ({ methods = [] }: ISideMethodProps): JSX.Element => {
           key={method.name}
           $isSelect={isSelect(method.name)}
           $typeColor={SIDE_METHOD_COLOR[method.method]}
-          onClick={() => setSelectMethod(method.name)}
+          onClick={() => handleClick(method.name)}
         >
           <span className="method-type">{method.method}</span>
           <div>{method.name}</div>

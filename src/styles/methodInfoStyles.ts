@@ -21,7 +21,8 @@ export const MethodInfoBox = styled.div<{ $typeColor: string }>`
     flex
     flex-col
     gap-y-4
-    py-2
+    pt-10
+    pb-2
     mb-2
   `}
 
@@ -76,15 +77,15 @@ export const MethodSampleBox = styled.div`
     flex
     gap-x-2
   `}
+`;
 
-  .content-wrapper {
-    ${tw`
-      flex
-      flex-col
-      gap-y-2
-      w-1/2
-    `}
-  }
+export const SampleWrapper = styled.div`
+  ${tw`
+    flex
+    flex-col
+    gap-y-2
+    w-1/2
+  `}
 
   .title {
     ${tw`
@@ -92,33 +93,40 @@ export const MethodSampleBox = styled.div`
       border-slate-300
       py-1
       text-[0.9rem]
+      text-blue-700
+    `}
+  }
+  .detail {
+    ${tw`
+      bg-slate-100
+    `}
+  }
+  .sample {
+    ${tw`
+      bg-blue-900
     `}
   }
 
   .content-box {
     ${tw`
+      h-[400px]
+      space-y-2
       p-3
       border
-      bg-slate-100
       rounded-xl
       flex-grow
-      min-h-[400px]
-      max-h-[650px]
       overflow-y-scroll
     `}
   }
 `;
 
-export const ParamTitle = styled.div`
+export const DetailTitle = styled.div`
   ${tw`
-    flex items-center
-    text-[1rem]
+    pl-1
+    text-[0.9rem]
     font-semibold
     text-blue-950
-    mb-2
-    pl-1
     cursor-pointer
-    gap-x-2
     rounded-md
     transform
     duration-200
@@ -126,7 +134,7 @@ export const ParamTitle = styled.div`
   `}
 `;
 
-export const ParamInfoBox = styled.div`
+export const FieldInfoBox = styled.div`
   ${tw`
     flex
     justify-between
@@ -139,7 +147,7 @@ export const ParamInfoBox = styled.div`
     gap-x-1
   `}
 
-  .param-name {
+  .field-name {
     ${tw`
       w-[30%]
       text-[1rem]
@@ -147,7 +155,7 @@ export const ParamInfoBox = styled.div`
   }
 `;
 
-export const PropertyBox = styled.div`
+export const AttributeBox = styled.div`
   ${tw`
     flex-grow
     border-b
@@ -155,7 +163,7 @@ export const PropertyBox = styled.div`
     border-slate-300
   `}
 
-  .property-desc {
+  .attribute-desc {
     ${tw`
       text-slate-500
       leading-none
@@ -163,7 +171,7 @@ export const PropertyBox = styled.div`
   }
 `;
 
-export const PropertyTypeBox = styled.div`
+export const AttributeTypeBox = styled.div`
   ${tw`
     flex
     items-center
@@ -172,16 +180,46 @@ export const PropertyTypeBox = styled.div`
   `}
 `;
 
-export const PropertyType = styled.div<{
-  $required?: boolean;
-}>`
+export const AttributeType = styled.div<{ $required?: boolean }>`
   ${tw`
     bg-slate-300
     rounded-sm
     px-1
-    h-[20px]
-    text-[0.8rem]
+    h-[1rem]
+    text-[0.7rem]
   `}
 
   ${({ $required }) => ($required ? tw`text-red-600 font-semibold` : null)}
+`;
+
+export const ArrayLabel = styled.div<{ $isArray: boolean }>`
+  ${tw`
+    mb-1
+    pl-4
+    text-sm
+    text-orange-300
+  `}
+
+  ${({ $isArray }) => ($isArray ? null : "display: none")};
+`;
+
+export const SampleTitle = styled.div`
+  ${tw`
+    pl-1
+    text-slate-100
+    text-[0.9rem]
+    cursor-pointer
+    rounded-md
+    transform
+    duration-200
+    hover:bg-blue-950
+  `}
+`;
+
+export const SamplePre = styled.pre`
+  ${tw`
+    pl-4
+    text-slate-100
+    text-[0.8rem]
+  `}
 `;

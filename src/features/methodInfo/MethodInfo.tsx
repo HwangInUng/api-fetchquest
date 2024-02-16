@@ -1,8 +1,13 @@
 import { MethodInfoBox, MethodInfoContainer, MethodSampleBox } from "styles";
 import MethodDescription from "./MethodDescription";
 import { ISideMethod } from "models";
-import RequestSample from "./RequestSample";
-import { SIDE_METHOD_COLOR } from "utils/constants";
+import { SIDE_METHOD_COLOR } from "utils";
+import MethodInfoDetail from "./MethodInfoDetail";
+import RequestParam from "./RequestParam";
+import MethodSample from "./MethodSample";
+import ResponseData from "./ResponseData";
+import { useRecoilValue } from "recoil";
+import { methodInfoState } from "atoms";
 
 const MethodInfo = ({
   method,
@@ -12,6 +17,8 @@ const MethodInfo = ({
   methodIndex: number;
 }) => {
   const isFirst = methodIndex === 0;
+  const responses = useRecoilValue(methodInfoState.sampleResponse);
+
   return (
     <MethodInfoContainer>
       {isFirst && <h2 className="category-name">{method.upperName}</h2>}
@@ -22,17 +29,22 @@ const MethodInfo = ({
         </div>
         <MethodDescription list={[]} />
         <MethodSampleBox>
-          <div className="content-wrapper">
-            <p className="title text-green-600">Request Sample</p>
-            <div className="content-box">
-              <RequestSample />
-              <RequestSample />
-            </div>
-          </div>
-          <div className="content-wrapper">
-            <p className="title text-blue-500">Response Sample</p>
-            <div className="content-box"></div>
-          </div>
+          <MethodInfoDetail title="Reqeust Parameter">
+            <RequestParam />
+          </MethodInfoDetail>
+          <MethodInfoDetail title="Response Data">
+            <div>test</div>
+          </MethodInfoDetail>
+        </MethodSampleBox>
+        <MethodSampleBox>
+          <MethodSample title="Request Sample">
+            <div>test</div>
+          </MethodSample>
+          <MethodSample title="Response Sample">
+            {responses.map((response) => (
+              <ResponseData key={response.name} sampleData={response} />
+            ))}
+          </MethodSample>
         </MethodSampleBox>
       </MethodInfoBox>
     </MethodInfoContainer>

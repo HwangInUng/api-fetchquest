@@ -1,0 +1,24 @@
+params:
+  - name: processCodeList
+    type: array
+    fields:
+      - name: name
+        attributes:
+          type: string
+          required: true
+          minLength: 8
+        desc: 필드 이름
+        example: 이름
+      - name: code
+        attributes:
+          type: string
+          format: YYYY-MM-DD
+          minLength: 4
+        desc: 필드 코드
+        example: 코드
+      - name: type
+        attributes:
+          type: string
+          format: YYYY-MM-DD
+        desc: 필드 설명
+        example: 설명

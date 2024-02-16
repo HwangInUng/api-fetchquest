@@ -1,16 +1,24 @@
 import yaml from "js-yaml";
-import { IDomain, IDomainList, ISideCategory } from "models";
+import { IData, IDataList, IDomain, IDomainList, ISideCategory } from "models";
 
-export async function fetchDomain() {
-  const response = await fetch("./yaml/domain.yaml");
+export async function fetchYaml(filePath: string) {
+  const response = await fetch(filePath);
   return response.text();
 }
 
 export function parsingDomain(yamlText: string) {
   const parseData = yaml.load(yamlText) as IDomainList;
+
   const domains = addUpperInfoToItems(parseData.domains);
   const methodList = separateMethodList(domains);
   return { domains, methodList };
+}
+
+export function parsingInfoData(yamlText: string) {
+  const parseData = yaml.load(yamlText) as IDataList;
+
+  if (parseData.params) return parseData.params;
+  if (parseData.responses) return parseData.responses;
 }
 
 export function separateMethodList(domains: Array<IDomain>) {
@@ -46,4 +54,20 @@ export function addUpperInfoToMethods(category: ISideCategory) {
   }));
 
   return addedMethods;
+}
+
+export function convertSampleData(sampleData: IData[]) {
+  const convertedSampleData = sampleData.map((data) => {
+    let temp = {};
+
+    for (const field of data.fields) {
+      temp = { [field.name]: field.example, ...temp };
+    }
+
+    return {
+      ...data,
+      fields: temp,
+    };
+  });
+  return convertedSampleData;
 }

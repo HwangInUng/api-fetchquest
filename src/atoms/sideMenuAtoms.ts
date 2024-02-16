@@ -30,7 +30,7 @@ const searchMethodList = selector<ISideMethod[]>({
 
     return newMethodList;
   },
-  set: ({ get, set, reset }, newValue) => {
+  set: ({ set, reset }, newValue) => {
     if (!Array.isArray(newValue)) return;
 
     const target = newValue[0] as ISideMethod;
@@ -70,12 +70,10 @@ const selectSideMethod = selector({
   get: ({ get }) => {
     return get(currentMethod);
   },
-  set: ({ get, set, reset }, newValue) => {
+  set: ({ set }, newValue) => {
     const targetMethodName = newValue as string;
-    const selectMethod = get(currentMethod);
 
-    if (targetMethodName === selectMethod) reset(currentMethod);
-    else set(currentMethod, targetMethodName);
+    set(currentMethod, targetMethodName);
   },
 });
 

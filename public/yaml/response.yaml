@@ -1,0 +1,43 @@
+responses:
+  - name: responseList
+    type: array
+    fields:
+      - name: STR_YMD
+        attributes:
+          type: date
+          format: YYYY-MM-DD
+        desc: 시작 일자
+        example: "2024-02-16"
+      - name: END_YMD
+        attributes:
+          type: date
+          format: YYYY-MM-DD
+        desc: 종료 일자
+        example: "2024-02-16"
+      - name: WFR_CNT
+        attributes:
+          type: number
+          format: int
+        desc: 웨이퍼 수량
+        example: 20
+  - name: responseList2
+    type: array
+    fields:
+      - name: STR_YMD
+        attributes:
+          type: date
+          format: YYYY-MM-DD
+        desc: 시작 일자
+        example: "2024-02-16"
+      - name: END_YMD
+        attributes:
+          type: date
+          format: YYYY-MM-DD
+        desc: 종료 일자
+        example: "2024-02-16"
+      - name: WFR_CNT
+        attributes:
+          type: number
+          format: int
+        desc: 웨이퍼 수량
+        example: 20
