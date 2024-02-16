@@ -6,7 +6,7 @@ import { useEffect, useRef } from "react";
 import { selectMethodByScroll } from "utils";
 
 const Content = (): JSX.Element => {
-  const methods = useRecoilValue(sideMenuState.sideMethodList);
+  const methods = useRecoilValue(sideMenuState.methodListByCurrentCategory);
   const setSelectMethod = useSetRecoilState(sideMenuState.selectSideMethod);
   const containerRef = useRef<HTMLDivElement | null>(null);
 

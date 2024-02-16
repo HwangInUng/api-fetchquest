@@ -64,10 +64,8 @@ export function convertSampleData(sampleData: IData[]) {
       temp = { [field.name]: field.example, ...temp };
     }
 
-    return {
-      ...data,
-      fields: temp,
-    };
+    const newSampleData = { ...data, fields: temp };
+    return newSampleData;
   });
   return convertedSampleData;
 }

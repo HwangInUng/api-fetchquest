@@ -14,6 +14,7 @@ const sampleResponse = selector<ISampleData[]>({
   key: "sampleResponse",
   get: ({ get }) => {
     const responses = get(infoData).responses;
+
     if (!responses) return [];
 
     const convertedResponses = convertSampleData(responses);

@@ -3,11 +3,11 @@ import MethodDescription from "./MethodDescription";
 import { ISideMethod } from "models";
 import { SIDE_METHOD_COLOR } from "utils";
 import MethodInfoDetail from "./MethodInfoDetail";
-import RequestParam from "./RequestParam";
 import MethodSample from "./MethodSample";
-import ResponseData from "./ResponseData";
 import { useRecoilValue } from "recoil";
 import { methodInfoState } from "atoms";
+import SampleData from "./ResponseSample";
+import DetailData from "./DetailData";
 
 const MethodInfo = ({
   method,
@@ -17,7 +17,9 @@ const MethodInfo = ({
   methodIndex: number;
 }) => {
   const isFirst = methodIndex === 0;
+  const requestParams = useRecoilValue(methodInfoState.sampleRequest);
   const responses = useRecoilValue(methodInfoState.sampleResponse);
+  const infoData = useRecoilValue(methodInfoState.infoData);
 
   return (
     <MethodInfoContainer>
@@ -30,19 +32,25 @@ const MethodInfo = ({
         <MethodDescription list={[]} />
         <MethodSampleBox>
           <MethodInfoDetail title="Reqeust Parameter">
-            <RequestParam />
+            {infoData.params?.map((param) => (
+              <DetailData detailData={param} />
+            ))}
           </MethodInfoDetail>
           <MethodInfoDetail title="Response Data">
-            <div>test</div>
+            {infoData.responses?.map((response) => (
+              <DetailData detailData={response} />
+            ))}
           </MethodInfoDetail>
         </MethodSampleBox>
         <MethodSampleBox>
           <MethodSample title="Request Sample">
-            <div>test</div>
+            {requestParams.map((param) => (
+              <SampleData key={param.name} sampleData={param} />
+            ))}
           </MethodSample>
           <MethodSample title="Response Sample">
             {responses.map((response) => (
-              <ResponseData key={response.name} sampleData={response} />
+              <SampleData key={response.name} sampleData={response} />
             ))}
           </MethodSample>
         </MethodSampleBox>

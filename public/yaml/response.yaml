@@ -2,19 +2,19 @@ responses:
   - name: responseList
     type: array
     fields:
-      - name: STR_YMD
+      - name: str_ymd
         attributes:
           type: date
           format: YYYY-MM-DD
         desc: 시작 일자
         example: "2024-02-16"
-      - name: END_YMD
+      - name: end_ymd
         attributes:
           type: date
           format: YYYY-MM-DD
         desc: 종료 일자
         example: "2024-02-16"
-      - name: WFR_CNT
+      - name: wfr_cnt
         attributes:
           type: number
           format: int
@@ -23,19 +23,19 @@ responses:
   - name: responseList2
     type: array
     fields:
-      - name: STR_YMD
+      - name: str_ymd
         attributes:
           type: date
           format: YYYY-MM-DD
         desc: 시작 일자
         example: "2024-02-16"
-      - name: END_YMD
+      - name: end_ymd
         attributes:
           type: date
           format: YYYY-MM-DD
         desc: 종료 일자
         example: "2024-02-16"
-      - name: WFR_CNT
+      - name: wfr_cnt
         attributes:
           type: number
           format: int

@@ -77,6 +77,16 @@ const selectSideMethod = selector({
   },
 });
 
+const methodListByCurrentCategory = selector<ISideMethod[]>({
+  key: "methodListByCurrentCategory",
+  get: ({ get }) => {
+    const methodList = get(sideMethodList);
+    const currentCategory = get(selectSideCategory);
+
+    return methodList.filter((method) => method.upperCode === currentCategory);
+  },
+});
+
 export const sideMenuState = {
   sideMenus,
   searchMethod,
@@ -84,4 +94,5 @@ export const sideMenuState = {
   searchMethodList,
   selectSideCategory,
   selectSideMethod,
+  methodListByCurrentCategory,
 };
