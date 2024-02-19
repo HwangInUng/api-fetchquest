@@ -1,7 +1,7 @@
-import { SideMenuContainer } from "styles";
-import SideList from "./SideList";
-import SideMenuTop from "./SideMenuTop";
-import SideSearchList from "./SideSearchList";
+import { SideMenuContainer } from 'styles';
+import SideList from './SideList';
+import SideMenuTop from './SideMenuTop';
+import SideSearchList from './SideSearchList';
 
 const SideMenu = () => {
   return (

@@ -1,9 +1,9 @@
-import { IDataList, ISampleData } from "models";
-import { atom, selector } from "recoil";
-import { convertSampleData } from "utils";
+import { IDataList, ISampleData } from 'models';
+import { atom, selector } from 'recoil';
+import { convertSampleData } from 'utils';
 
 const infoData = atom<IDataList>({
-  key: "infoData",
+  key: 'infoData',
   default: {
     params: [],
     responses: [],
@@ -11,7 +11,7 @@ const infoData = atom<IDataList>({
 });
 
 const sampleResponse = selector<ISampleData[]>({
-  key: "sampleResponse",
+  key: 'sampleResponse',
   get: ({ get }) => {
     const responses = get(infoData).responses;
 
@@ -23,7 +23,7 @@ const sampleResponse = selector<ISampleData[]>({
 });
 
 const sampleRequest = selector<ISampleData[]>({
-  key: "sampleRequest",
+  key: 'sampleRequest',
   get: ({ get }) => {
     const params = get(infoData).params;
     if (!params) return [];

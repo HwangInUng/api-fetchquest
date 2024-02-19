@@ -1,2 +1,2 @@
-export { default as SideLogo } from "./side_logo.png";
-export { default as Spinner } from "./Spinner.gif";
+export { default as SideLogo } from './side_logo.png';
+export { default as Spinner } from './Spinner.gif';

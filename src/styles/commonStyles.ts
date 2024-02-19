@@ -1,5 +1,5 @@
-import tw from "twin.macro";
-import styled from "styled-components";
+import tw from 'twin.macro';
+import styled from 'styled-components';
 
 export const LoadingBox = styled.div`
   ${tw`

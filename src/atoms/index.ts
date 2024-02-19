@@ -1,2 +1,2 @@
-export * from "./sideMenuAtoms";
-export * from "./methodInfoAtoms";
+export * from './sideMenuAtoms';
+export * from './methodInfoAtoms';

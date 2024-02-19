@@ -1,11 +1,11 @@
-import { sideMenuState } from "atoms";
-import { useRecoilState } from "recoil";
-import { ISideMethod } from "models";
-import { SideSearchListBox } from "styles";
+import { sideMenuState } from 'atoms';
+import { useRecoilState } from 'recoil';
+import { ISideMethod } from 'models';
+import { SideSearchListBox } from 'styles';
 
 const SideSearchList = () => {
   const [searchMethodList, resetSearchMethodList] = useRecoilState(
-    sideMenuState.searchMethodList
+    sideMenuState.searchMethodList,
   );
   const hasData = searchMethodList.length === 0;
 
@@ -15,10 +15,10 @@ const SideSearchList = () => {
 
   return (
     <SideSearchListBox $hasData={hasData}>
-      {searchMethodList.map((method) => (
+      {searchMethodList.map(method => (
         <div
           key={method.name}
-          className="search-item"
+          className='search-item'
           onClick={() => handleSelect(method)}
         >
           {method.name}

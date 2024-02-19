@@ -1,5 +1,5 @@
-import tw from "twin.macro";
-import { styled } from "styled-components";
+import tw from 'twin.macro';
+import { styled } from 'styled-components';
 
 export const MethodInfoContainer = styled.div`
   ${tw`
@@ -72,14 +72,14 @@ export const MethodDescriptionBox = styled.div`
   }
 `;
 
-export const MethodSampleBox = styled.div`
+export const MethodContentBox = styled.div`
   ${tw`
     flex
     gap-x-2
   `}
 `;
 
-export const SampleWrapper = styled.div`
+export const MethodContentWrapper = styled.div`
   ${tw`
     flex
     flex-col
@@ -103,7 +103,7 @@ export const SampleWrapper = styled.div`
   }
   .sample {
     ${tw`
-      bg-blue-900
+      bg-blue-950
     `}
   }
 
@@ -200,7 +200,7 @@ export const ArrayLabel = styled.div<{ $isArray: boolean }>`
     text-orange-300
   `}
 
-  ${({ $isArray }) => ($isArray ? null : "display: none")};
+  ${({ $isArray }) => ($isArray ? null : 'display: none')};
 `;
 
 export const SampleTitle = styled.div`
@@ -212,7 +212,7 @@ export const SampleTitle = styled.div`
     rounded-md
     transform
     duration-200
-    hover:bg-blue-950
+    hover:bg-slate-700
   `}
 `;
 

@@ -1,31 +1,31 @@
-import { IDomain, ISideMethod } from "models";
-import { atom, selector } from "recoil";
+import { IDomain, ISideMethod } from 'models';
+import { atom, selector } from 'recoil';
 
 const sideMenus = atom<IDomain[]>({
-  key: "sideMenus",
+  key: 'sideMenus',
   default: [],
 });
 
 const searchMethod = atom({
-  key: "searchMethod",
-  default: "",
+  key: 'searchMethod',
+  default: '',
 });
 
 const sideMethodList = atom<ISideMethod[]>({
-  key: "sideMethodList",
+  key: 'sideMethodList',
   default: [],
 });
 
 const searchMethodList = selector<ISideMethod[]>({
-  key: "searchMethodList",
+  key: 'searchMethodList',
   get: ({ get }) => {
     const target = get(searchMethod);
     const methodList = get(sideMethodList);
 
     if (!target || target.length === 0) return [];
 
-    const newMethodList = methodList.filter((method) =>
-      method.name.includes(target)
+    const newMethodList = methodList.filter(method =>
+      method.name.includes(target),
     );
 
     return newMethodList;
@@ -43,12 +43,12 @@ const searchMethodList = selector<ISideMethod[]>({
 });
 
 const currentCategory = atom({
-  key: "currentCategory",
-  default: "",
+  key: 'currentCategory',
+  default: '',
 });
 
 const selectSideCategory = selector({
-  key: "selectSideCategory",
+  key: 'selectSideCategory',
   get: ({ get }) => {
     return get(currentCategory);
   },
@@ -61,12 +61,12 @@ const selectSideCategory = selector({
 });
 
 const currentMethod = atom({
-  key: "currentMethod",
-  default: "",
+  key: 'currentMethod',
+  default: '',
 });
 
 const selectSideMethod = selector({
-  key: "selectSideMethod",
+  key: 'selectSideMethod',
   get: ({ get }) => {
     return get(currentMethod);
   },
@@ -78,12 +78,14 @@ const selectSideMethod = selector({
 });
 
 const methodListByCurrentCategory = selector<ISideMethod[]>({
-  key: "methodListByCurrentCategory",
+  key: 'methodListByCurrentCategory',
   get: ({ get }) => {
     const methodList = get(sideMethodList);
     const currentCategory = get(selectSideCategory);
 
-    return methodList.filter((method) => method.upperCode === currentCategory);
+    return methodList.filter(
+      method => method.upperCode === currentCategory,
+    );
   },
 });
 

@@ -1,5 +1,5 @@
-import tw from "twin.macro";
-import styled from "styled-components";
+import tw from 'twin.macro';
+import styled from 'styled-components';
 
 export const SideMenuContainer = styled.div`
   box-shadow: 0 0 7px rgba(23, 37, 84, 0.6);

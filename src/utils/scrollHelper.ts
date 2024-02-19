@@ -1,16 +1,16 @@
-import { SetterOrUpdater } from "recoil";
+import { SetterOrUpdater } from 'recoil';
 
 export const onMoveToScroll = (targetId: string) => {
   const target = document.getElementById(targetId);
   target?.scrollIntoView({
-    behavior: "smooth",
-    block: "start",
+    behavior: 'smooth',
+    block: 'start',
   });
 };
 
 export const selectMethodByScroll = (
   container: HTMLDivElement,
-  setMethod: SetterOrUpdater<string>
+  setMethod: SetterOrUpdater<string>,
 ) => {
   const scrollPosition = container.scrollTop + container.offsetTop;
   const children = Array.from(container.children);

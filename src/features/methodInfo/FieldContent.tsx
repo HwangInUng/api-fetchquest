@@ -1,14 +1,17 @@
-import { IAttributes, IField } from "models";
-import { AttributeBox, AttributeType, AttributeTypeBox } from "styles";
+import { IAttributes, IField } from 'models';
+import { AttributeBox, AttributeType, AttributeTypeBox } from 'styles';
 
 type AttributeKey = keyof IAttributes;
 
-const renderAttribute = (key: string, attributes: { [key: string]: any }) => {
+const renderAttribute = (
+  key: string,
+  attributes: { [key: string]: any },
+) => {
   const renderObject = {
     type: attributes.type,
     minLength: `>=${attributes.minLength}`,
     maxLength: `<=${attributes.maxLength}`,
-    required: "required",
+    required: 'required',
     format: attributes.format,
   };
   const targetKey = key as AttributeKey;
@@ -21,16 +24,16 @@ const FieldContent = ({ field }: { field: IField }) => {
   return (
     <AttributeBox>
       <AttributeTypeBox>
-        {Object.keys(attributes).map((key) => (
+        {Object.keys(attributes).map(key => (
           <AttributeType
             key={key}
-            $required={key === "required" && attributes[key]}
+            $required={key === 'required' && attributes[key]}
           >
             {renderAttribute(key, attributes)}
           </AttributeType>
         ))}
       </AttributeTypeBox>
-      <div className="attribute-desc">{desc}</div>
+      <div className='attribute-desc'>{desc}</div>
     </AttributeBox>
   );
 };

@@ -1,5 +1,11 @@
-import yaml from "js-yaml";
-import { IData, IDataList, IDomain, IDomainList, ISideCategory } from "models";
+import yaml from 'js-yaml';
+import {
+  IData,
+  IDataList,
+  IDomain,
+  IDomainList,
+  ISideCategory,
+} from 'models';
 
 export async function fetchYaml(filePath: string) {
   const response = await fetch(filePath);
@@ -22,13 +28,13 @@ export function parsingInfoData(yamlText: string) {
 }
 
 export function separateMethodList(domains: Array<IDomain>) {
-  return domains.flatMap((domain) =>
-    domain.categories.flatMap((category) => category.methods || [])
+  return domains.flatMap(domain =>
+    domain.categories.flatMap(category => category.methods || []),
   );
 }
 
 export function addUpperInfoToItems(domains: Array<IDomain>) {
-  const addedDomains = domains.map((domain) => ({
+  const addedDomains = domains.map(domain => ({
     ...domain,
     categories: addUpperInfoToCategories(domain),
   }));
@@ -36,7 +42,7 @@ export function addUpperInfoToItems(domains: Array<IDomain>) {
 }
 
 export function addUpperInfoToCategories(domain: IDomain) {
-  return domain.categories.map((category) => ({
+  return domain.categories.map(category => ({
     ...category,
     upperCode: domain.code,
     upperName: domain.name,
@@ -47,7 +53,7 @@ export function addUpperInfoToCategories(domain: IDomain) {
 export function addUpperInfoToMethods(category: ISideCategory) {
   if (!category.methods) return [];
 
-  const addedMethods = category.methods.map((method) => ({
+  const addedMethods = category.methods.map(method => ({
     ...method,
     upperCode: category.code,
     upperName: category.name,
@@ -57,7 +63,7 @@ export function addUpperInfoToMethods(category: ISideCategory) {
 }
 
 export function convertSampleData(sampleData: IData[]) {
-  const convertedSampleData = sampleData.map((data) => {
+  const convertedSampleData = sampleData.map(data => {
     let temp = {};
 
     for (const field of data.fields) {

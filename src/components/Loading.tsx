@@ -1,10 +1,13 @@
-import { Spinner } from "assets";
-import { LoadingBox } from "styles";
+import { Spinner } from 'assets';
+import { LoadingBox } from 'styles';
 
 const Loading = () => {
   return (
     <LoadingBox>
-      <img src={Spinner} alt="loading" />
+      <img
+        src={Spinner}
+        alt='loading'
+      />
     </LoadingBox>
   );
 };

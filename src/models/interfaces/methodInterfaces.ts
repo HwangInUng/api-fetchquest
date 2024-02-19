@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 export interface IDataList {
   params?: IData[];
@@ -35,6 +35,7 @@ export interface ISampleData {
 export interface IMethodInfoProps {
   children: ReactNode;
   title: string;
+  type: string;
 }
 
 export interface ISampleField {

@@ -1,12 +1,37 @@
-import { IMethodInfoProps } from "models";
-import { SampleWrapper } from "styles";
+import { MethodContentBox } from 'styles';
+import MethodInfoContent from './MethodInfoContent';
+import SampleData from './SampleData';
+import { useRecoilValue } from 'recoil';
+import { methodInfoState } from 'atoms';
 
-const MethodSample = ({ children, title }: IMethodInfoProps) => {
+const MethodSample = () => {
+  const requestParams = useRecoilValue(methodInfoState.sampleRequest);
+  const responses = useRecoilValue(methodInfoState.sampleResponse);
   return (
-    <SampleWrapper>
-      <p className="title">{title}</p>
-      <div className="content-box sample">{children}</div>
-    </SampleWrapper>
+    <MethodContentBox>
+      <MethodInfoContent
+        title='Request Sample'
+        type='sample'
+      >
+        {requestParams.map(param => (
+          <SampleData
+            key={param.name}
+            sampleData={param}
+          />
+        ))}
+      </MethodInfoContent>
+      <MethodInfoContent
+        title='Response Sample'
+        type='sample'
+      >
+        {responses.map(response => (
+          <SampleData
+            key={response.name}
+            sampleData={response}
+          />
+        ))}
+      </MethodInfoContent>
+    </MethodContentBox>
   );
 };
 

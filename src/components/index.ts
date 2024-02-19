@@ -1,1 +1,1 @@
-export { default as ContentArea } from "../features/Content";
+export { default as ContentArea } from '../features/Content';

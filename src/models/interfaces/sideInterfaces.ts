@@ -1,6 +1,6 @@
 export interface ISideMethod {
   name: string;
-  method: "get" | "post" | "put" | "delete";
+  method: 'get' | 'post' | 'put' | 'delete';
   upperCode: string;
   upperName: string;
   // url?: string;
