@@ -7,8 +7,18 @@ domains:
         methods:
           - name: saveProcessCode()
             method: post
+            param:
+              - name: processCodeList
+            res:
+              - code: 200
+                name: responseList
+              - code: 400
+                name: badResponse
           - name: getLearnList()
             method: get
+            param:
+              - name: testCodeList
+            res:
           - name: removeSensor()
             method: delete
       - name: 센서그룹 관리

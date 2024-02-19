@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 
 export const MethodInfoContainer = styled.div`
   ${tw`
-    w-[60%]
+    w-[65%]
     px-2
   `}
 
@@ -86,12 +86,19 @@ export const MethodContentWrapper = styled.div`
     gap-y-2
     w-1/2
   `}
-
-  .title {
+  .title-box {
     ${tw`
+      flex
+      justify-between
+      items-center
       border-b
       border-slate-300
       py-1
+    `}
+  }
+
+  .title {
+    ${tw`
       text-[0.9rem]
       text-blue-700
     `}
@@ -118,6 +125,33 @@ export const MethodContentWrapper = styled.div`
       overflow-y-scroll
     `}
   }
+
+  .button-box {
+    ${tw`
+      flex
+      flex-grow
+      justify-end
+      gap-x-1
+    `}
+  }
+`;
+
+export const DetailResponseButton = styled.button`
+  ${tw`
+    bg-slate-200
+    px-2
+    py-1
+    text-[0.7rem]
+    rounded-md
+    text-green-600
+    font-semibold
+    border
+    border-green-600
+    opacity-70 
+    hover:opacity-100
+    transform
+    duration-150
+  `}
 `;
 
 export const DetailTitle = styled.div`

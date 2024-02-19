@@ -1,14 +1,14 @@
 import { ReactNode } from 'react';
 
 export interface IDataList {
-  params?: IData[];
-  responses?: IData[];
+  params?: { [key: string]: IData };
+  responses?: { [key: string]: IData };
 }
 
 export interface IData {
   name: string;
   type: string;
-  fields: Array<IField>;
+  fields: IField[];
 }
 
 export interface IField {
@@ -36,6 +36,11 @@ export interface IMethodInfoProps {
   children: ReactNode;
   title: string;
   type: string;
+}
+
+export interface IInfoResponseProps extends IMethodInfoProps {
+  responses: { [key: number]: IData };
+  selectResponseCode: (responseCode: number) => void;
 }
 
 export interface ISampleField {

@@ -17,6 +17,7 @@ const SampleData = ({
   const handleOpen = () => {
     setIsOpen(!isOpen);
   };
+
   return (
     <div>
       <SampleTitle onClick={handleOpen}>

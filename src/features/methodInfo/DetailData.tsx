@@ -9,14 +9,14 @@ const DetailData = ({ detailData }: { detailData: IData }) => {
     setIsOpen(!isOpen);
   };
   const isArray = detailData.type === 'array';
-  const paramName = isOpen
+  const dataName = isOpen
     ? `${detailData.name} -`
     : `${detailData.name} +`;
 
   return (
     <div>
       <DetailTitle onClick={handleOpen}>
-        <span>{paramName}</span>
+        <span>{dataName}</span>
       </DetailTitle>
       <ArrayLabel $isArray={isArray}>{`Array [ ... ]`}</ArrayLabel>
       {isOpen &&

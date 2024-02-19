@@ -1,27 +1,35 @@
 import { MethodContentBox } from 'styles';
-import MethodInfoContent from './MethodInfoContent';
-import { useRecoilValue } from 'recoil';
-import { methodInfoState } from 'atoms';
 import DetailData from './DetailData';
+import { ISideMethod } from 'models';
+import MethodInfoRequest from './MethodInfoRequest';
+import MethodInfoResponse from './MethodInfoResponse';
+import { useState } from 'react';
 
-const MethodDetail = () => {
-  const infoData = useRecoilValue(methodInfoState.infoData);
+const MethodDetail = ({ method }: { method: ISideMethod }) => {
+  const [selectResponseCode, setSelectResponseCode] = useState(200);
+  const paramsKeys = Object.keys(method.param);
+  const handleSelectResponseCode = (responseCode: number) => {
+    setSelectResponseCode(responseCode);
+  };
+
   return (
     <MethodContentBox>
-      <MethodInfoContent
+      <MethodInfoRequest
         title='Reqeust Parameter'
         type='detail'
       >
-        {infoData.params?.map(param => <DetailData detailData={param} />)}
-      </MethodInfoContent>
-      <MethodInfoContent
+        {paramsKeys?.map(key => (
+          <DetailData detailData={method.param[key]} />
+        ))}
+      </MethodInfoRequest>
+      <MethodInfoResponse
         title='Response Data'
         type='detail'
+        responses={method.res}
+        selectResponseCode={handleSelectResponseCode}
       >
-        {infoData.responses?.map(response => (
-          <DetailData detailData={response} />
-        ))}
-      </MethodInfoContent>
+        <DetailData detailData={method.res[selectResponseCode]} />
+      </MethodInfoResponse>
     </MethodContentBox>
   );
 };

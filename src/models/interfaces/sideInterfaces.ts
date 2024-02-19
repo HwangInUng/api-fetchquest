@@ -1,13 +1,27 @@
+import { IData } from './methodInterfaces';
+
+export interface IInitialSideMethod {
+  name: string;
+  method: 'get' | 'post' | 'put' | 'delete';
+  upperCode: string;
+  upperName: string;
+  url?: string;
+  param: { name: string }[];
+  res: { code: number; name: string }[];
+}
+
 export interface ISideMethod {
   name: string;
   method: 'get' | 'post' | 'put' | 'delete';
   upperCode: string;
   upperName: string;
-  // url?: string;
+  url?: string;
+  param: { [key: string]: IData };
+  res: { [key: number]: IData };
 }
 
 export interface ISideMethodProps {
-  methods?: Array<ISideMethod>;
+  methods?: IInitialSideMethod[];
 }
 
 export interface ISideCategory {
@@ -15,19 +29,19 @@ export interface ISideCategory {
   name: string;
   upperCode: string;
   upperName: string;
-  methods?: Array<ISideMethod>;
+  methods?: IInitialSideMethod[];
 }
 
 export interface ISideCategoryProps {
-  categories: Array<ISideCategory>;
+  categories: ISideCategory[];
 }
 
 export interface IDomainList {
-  domains: Array<IDomain>;
+  domains: IDomain[];
 }
 
 export interface IDomain {
   name: string;
   code: string;
-  categories: Array<ISideCategory>;
+  categories: ISideCategory[];
 }

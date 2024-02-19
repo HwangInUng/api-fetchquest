@@ -1,36 +1,41 @@
 import { MethodContentBox } from 'styles';
-import MethodInfoContent from './MethodInfoContent';
 import SampleData from './SampleData';
-import { useRecoilValue } from 'recoil';
-import { methodInfoState } from 'atoms';
+import { ISideMethod } from 'models';
+import { convertSampleData } from 'utils';
+import MethodInfoRequest from './MethodInfoRequest';
+import MethodInfoResponse from './MethodInfoResponse';
+import { useState } from 'react';
 
-const MethodSample = () => {
-  const requestParams = useRecoilValue(methodInfoState.sampleRequest);
-  const responses = useRecoilValue(methodInfoState.sampleResponse);
+const MethodSample = ({ method }: { method: ISideMethod }) => {
+  const [selectResponseCode, setSelectResponseCode] = useState(200);
+  const paramsKeys = Object.keys(method.param);
+  const handleSelectResponseCode = (responseCode: number) => {
+    setSelectResponseCode(responseCode);
+  };
+
   return (
     <MethodContentBox>
-      <MethodInfoContent
+      <MethodInfoRequest
         title='Request Sample'
         type='sample'
       >
-        {requestParams.map(param => (
+        {paramsKeys.map(key => (
           <SampleData
-            key={param.name}
-            sampleData={param}
+            key={key}
+            sampleData={convertSampleData(method.param[key])}
           />
         ))}
-      </MethodInfoContent>
-      <MethodInfoContent
+      </MethodInfoRequest>
+      <MethodInfoResponse
         title='Response Sample'
         type='sample'
+        responses={method.res}
+        selectResponseCode={handleSelectResponseCode}
       >
-        {responses.map(response => (
-          <SampleData
-            key={response.name}
-            sampleData={response}
-          />
-        ))}
-      </MethodInfoContent>
+        <SampleData
+          sampleData={convertSampleData(method.res[selectResponseCode])}
+        />
+      </MethodInfoResponse>
     </MethodContentBox>
   );
 };

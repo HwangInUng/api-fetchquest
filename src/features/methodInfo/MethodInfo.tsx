@@ -13,6 +13,7 @@ const MethodInfo = ({
   methodIndex: number;
 }) => {
   const isFirst = methodIndex === 0;
+  console.log(method);
 
   return (
     <MethodInfoContainer>
@@ -23,8 +24,8 @@ const MethodInfo = ({
           <span className='name'>{method.name}</span>
         </div>
         <MethodDescription list={[]} />
-        <MethodDetail />
-        <MethodSample />
+        <MethodDetail method={method} />
+        <MethodSample method={method} />
       </MethodInfoBox>
     </MethodInfoContainer>
   );

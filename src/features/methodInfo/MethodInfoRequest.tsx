@@ -1,18 +1,19 @@
 import { IMethodInfoProps } from 'models';
 import { MethodContentWrapper } from 'styles';
 
-const MethodInfoContent = ({
+const MethodInfoRequest = ({
   children,
   title,
   type,
 }: IMethodInfoProps) => {
-  const className = `${type} content-box`;
   return (
     <MethodContentWrapper>
-      <p className='title'>{title}</p>
-      <div className={className}>{children}</div>
+      <div className='title-box'>
+        <p className='title'>{title}</p>
+      </div>
+      <div className={`content-box ${type}`}>{children}</div>
     </MethodContentWrapper>
   );
 };
 
-export default MethodInfoContent;
+export default MethodInfoRequest;

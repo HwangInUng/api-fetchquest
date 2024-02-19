@@ -1,5 +1,5 @@
 responses:
-  - name: responseList
+  responseList:
     type: array
     fields:
       - name: str_ymd
@@ -20,7 +20,7 @@ responses:
           format: int
         desc: 웨이퍼 수량
         example: 20
-  - name: responseList2
+  badResponse:
     type: array
     fields:
       - name: str_ymd

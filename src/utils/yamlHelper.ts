@@ -5,6 +5,7 @@ import {
   IDomain,
   IDomainList,
   ISideCategory,
+  ISideMethod,
 } from 'models';
 
 export async function fetchYaml(filePath: string) {
@@ -16,8 +17,7 @@ export function parsingDomain(yamlText: string) {
   const parseData = yaml.load(yamlText) as IDomainList;
 
   const domains = addUpperInfoToItems(parseData.domains);
-  const methodList = separateMethodList(domains);
-  return { domains, methodList };
+  return domains;
 }
 
 export function parsingInfoData(yamlText: string) {
@@ -27,10 +27,40 @@ export function parsingInfoData(yamlText: string) {
   if (parseData.responses) return parseData.responses;
 }
 
-export function separateMethodList(domains: Array<IDomain>) {
-  return domains.flatMap(domain =>
+export function separateMethodList(
+  domains: IDomain[],
+  dataList: IDataList,
+): ISideMethod[] {
+  if (!dataList.params || !dataList.responses) return [];
+
+  const params = dataList.params;
+  const response = dataList.responses;
+  const flatMethods = domains.flatMap(domain =>
     domain.categories.flatMap(category => category.methods || []),
   );
+
+  const resultMethodList = flatMethods.map(method => {
+    let methodParam = {};
+    let methodRes = {};
+
+    method?.param?.forEach(
+      param =>
+        (methodParam = {
+          ...methodParam,
+          [param.name]: { ...params[param.name], name: param.name },
+        }),
+    );
+    method?.res?.forEach(res => {
+      methodRes = {
+        ...methodRes,
+        [res.code]: { ...response[res.name], name: res.name },
+      };
+    });
+
+    return { ...method, param: methodParam, res: methodRes };
+  });
+
+  return resultMethodList;
 }
 
 export function addUpperInfoToItems(domains: Array<IDomain>) {
@@ -62,16 +92,15 @@ export function addUpperInfoToMethods(category: ISideCategory) {
   return addedMethods;
 }
 
-export function convertSampleData(sampleData: IData[]) {
-  const convertedSampleData = sampleData.map(data => {
-    let temp = {};
+export function convertSampleData(sampleData: IData) {
+  const fields = sampleData?.fields;
 
-    for (const field of data.fields) {
-      temp = { [field.name]: field.example, ...temp };
-    }
+  let temp = {};
 
-    const newSampleData = { ...data, fields: temp };
-    return newSampleData;
-  });
-  return convertedSampleData;
+  for (const field of fields) {
+    temp = { [field.name]: field.example, ...temp };
+  }
+
+  const newSampleData = { ...sampleData, fields: temp };
+  return newSampleData;
 }
