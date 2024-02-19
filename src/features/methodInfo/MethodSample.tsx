@@ -30,7 +30,8 @@ const MethodSample = ({ method }: { method: ISideMethod }) => {
         title='Response Sample'
         type='sample'
         responses={method.res}
-        selectResponseCode={handleSelectResponseCode}
+        selectResponseCode={selectResponseCode}
+        setselectResponseCode={handleSelectResponseCode}
       >
         <SampleData
           sampleData={convertSampleData(method.res[selectResponseCode])}

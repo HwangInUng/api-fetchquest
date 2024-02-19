@@ -5,43 +5,52 @@ domains:
       - name: 공정코드 관리
         code: AIBI040M01
         methods:
-          - name: saveProcessCode()
-            method: post
-            param:
-              - name: processCodeList
-            res:
-              - code: 200
-                name: responseList
-              - code: 400
-                name: badResponse
-          - name: getLearnList()
+          - name: getSensorCodeList()
             method: get
             param:
-              - name: testCodeList
+              - name: searchSensorCode
             res:
-          - name: removeSensor()
-            method: delete
-      - name: 센서그룹 관리
-        code: AILM020M01
-        methods:
-          - name: getLearnList2()
+              - code: 200
+                name: codeList
+            description:
+              - test1
+              - test2
+              - 설명3
+          - name: saveSensorCode()
             method: post
-      - name: 수집데이터 조회
+            param:
+              - name: sensorCodeList
+            res:
+              - code: 200
+                name:
+              - code: 400
+                name: 400-error
+            description:
+              - test1
+              - test2
+              - 설명3
+      - name: 센서그룹 관리
         code: AILM010M01
-      - name: 불량정보 관리
-        code: AILM060M01
-      - name: 학습처리
-        code: AILM050M01
-  - name: sensor-모니터링 관리
-    code: sensor-monitor
-    categories:
-      - name: 모니터링 설정
-        code: AIPM060M01
-      - name: 시스템 현황
-        code: AIPM010M01
-      - name: 실시간 모니터링
-        code: AIPM020M01
-      - name: 데이터 분석1
-        code: AIPM030M01
-      - name: 데이터 분석2
-        code: AIPM040M01
+        methods:
+          - name: getCollectionList()
+            method: get
+            param:
+              - name: searchCollection
+            res:
+              - code: 200
+                name: collectionDataList
+            description:
+              - test1
+              - test2
+              - 설명3
+          - name: getSensorDataList()
+            method: get
+            param:
+              - name: searchSensorByCollection
+            res:
+              - code: 200
+                name: sensorDataList
+            description:
+              - test1
+              - test2
+              - 설명3

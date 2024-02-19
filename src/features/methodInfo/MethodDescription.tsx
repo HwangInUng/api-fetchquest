@@ -1,11 +1,11 @@
 import { MethodDescriptionBox } from 'styles';
 
-const MethodDescription = ({ list }: { list: Array<any> }) => {
+const MethodDescription = ({ description }: { description: string[] }) => {
   return (
     <MethodDescriptionBox>
       <ul className='list'>
-        {list.map(l => (
-          <li>{l.name}</li>
+        {description.map((desc, index) => (
+          <li key={index}>{desc}</li>
         ))}
       </ul>
     </MethodDescriptionBox>

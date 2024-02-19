@@ -39,28 +39,30 @@ export function separateMethodList(
     domain.categories.flatMap(category => category.methods || []),
   );
 
-  const resultMethodList = flatMethods.map(method => {
+  const separatedMethodList = flatMethods.map(method => {
     let methodParam = {};
     let methodRes = {};
+    const currentParams = params[method.upperCode];
+    const currentResponses = response[method.upperCode];
 
     method?.param?.forEach(
       param =>
         (methodParam = {
           ...methodParam,
-          [param.name]: { ...params[param.name], name: param.name },
+          [param.name]: { ...currentParams[param.name], name: param.name },
         }),
     );
     method?.res?.forEach(res => {
       methodRes = {
         ...methodRes,
-        [res.code]: { ...response[res.name], name: res.name },
+        [res.code]: { ...currentResponses[res.name], name: res.name },
       };
     });
 
     return { ...method, param: methodParam, res: methodRes };
   });
 
-  return resultMethodList;
+  return separatedMethodList;
 }
 
 export function addUpperInfoToItems(domains: Array<IDomain>) {
@@ -93,6 +95,8 @@ export function addUpperInfoToMethods(category: ISideCategory) {
 }
 
 export function convertSampleData(sampleData: IData) {
+  if (!sampleData.name) return { name: '', type: '', fields: {} };
+
   const fields = sampleData?.fields;
 
   let temp = {};

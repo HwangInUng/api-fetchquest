@@ -3,6 +3,7 @@ import { IData } from './methodInterfaces';
 export interface IInitialSideMethod {
   name: string;
   method: 'get' | 'post' | 'put' | 'delete';
+  description: string[];
   upperCode: string;
   upperName: string;
   url?: string;
@@ -13,6 +14,7 @@ export interface IInitialSideMethod {
 export interface ISideMethod {
   name: string;
   method: 'get' | 'post' | 'put' | 'delete';
+  description: string[];
   upperCode: string;
   upperName: string;
   url?: string;

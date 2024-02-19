@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 
 export interface IDataList {
-  params?: { [key: string]: IData };
-  responses?: { [key: string]: IData };
+  params?: { [key: string]: { [key: string]: IData } };
+  responses?: { [key: string]: { [key: string]: IData } };
 }
 
 export interface IData {
@@ -40,7 +40,8 @@ export interface IMethodInfoProps {
 
 export interface IInfoResponseProps extends IMethodInfoProps {
   responses: { [key: number]: IData };
-  selectResponseCode: (responseCode: number) => void;
+  selectResponseCode: number;
+  setselectResponseCode: (responseCode: number) => void;
 }
 
 export interface ISampleField {

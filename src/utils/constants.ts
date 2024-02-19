@@ -5,3 +5,15 @@ export const SIDE_METHOD_COLOR: { [key: string]: string } = {
   put: '#994D1C',
   delete: '#B31312',
 };
+
+// response property
+export const ERROR_CODE_TEXT: {
+  [key: number]: { text: string; isError: boolean };
+} = {
+  200: { text: '200: Ok', isError: false },
+  400: { text: '400: Bad Request', isError: true },
+  401: { text: '401: Unauthorized', isError: true },
+  403: { text: '403: Forbidden', isError: true },
+  404: { text: '404: Not Found', isError: true },
+  405: { text: '405: Method Not Allowed', isError: true },
+};

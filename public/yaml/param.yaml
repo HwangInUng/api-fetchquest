@@ -1,47 +1,122 @@
+STR_YMD: &STR_YMD
+  - name: STR_YMD
+    attributes:
+      type: date
+      format: YYYY-MM-DD
+    desc: 시작일자
+    example: 2023-07-01
+END_YMD: &END_YMD
+  - name: END_YMD
+    attributes:
+      type: date
+      format: YYYY-MM-DD
+    desc: 종료일자
+    example: 2023-07-10
+
 params:
-  processCodeList:
-    type: array
-    fields:
-      - name: name
-        attributes:
-          type: string
-          required: true
-          minLength: 8
-        desc: 필드 이름
-        example: 이름
-      - name: code
-        attributes:
-          type: string
-          format: YYYY-MM-DD
-          minLength: 4
-        desc: 필드 코드
-        example: 코드
-      - name: type
-        attributes:
-          type: string
-          format: YYYY-MM-DD
-        desc: 필드 설명
-        example: 설명
-  testCodeList:
-    type: array
-    fields:
-      - name: name
-        attributes:
-          type: string
-          required: true
-          minLength: 8
-        desc: 필드 이름
-        example: 이름
-      - name: code
-        attributes:
-          type: string
-          format: YYYY-MM-DD
-          minLength: 4
-        desc: 필드 코드
-        example: 코드
-      - name: type
-        attributes:
-          type: string
-          format: YYYY-MM-DD
-        desc: 필드 설명
-        example: 설명
+  # AIBI040M01---------------------------------start
+  AIBI040M01:
+    searchSensorCode:
+      type: object
+      fields:
+        - name: PRS_NM
+          attributes:
+            type: string
+            minLength: 2
+          desc: 공정명
+          example: 식각
+        - name: USE_YN
+          attributes:
+            type: string
+            format: 'Y: 사용 N: 미사용'
+          desc: 사용여부
+          example: Y
+    sensorCodeList:
+      type: array
+      fields:
+        - name: PRS_CD
+          attributes:
+            type: string
+          desc: 공정코드
+          example: PRC10
+        - name: PRS_CD_NM
+          attributes:
+            type: string
+          desc: 공정명
+          example: 식각
+        - name: PRS_HRK_CD
+          attributes:
+            type: string
+          desc: 상위 공정코드
+          example: PRS10
+        - name: SRT_SQN
+          attributes:
+            type: string
+          desc: 정렬순서
+          example: '100001'
+        - name: PRS_DTT_NM
+          attributes:
+            type: string
+          desc: 공정구분
+          example: 관리공정
+        - <<: *STR_YMD
+        - <<: *END_YMD
+        - name: RMK_CONT
+          attributes:
+            type: string
+          desc: 비고
+          example: 기초자료
+        - name: ROW_TYPE
+          attributes:
+            type: number
+            format: '0: -, 1:추가, 2:수정, 3:삭제'
+          desc: 행의 유형
+          example: 1
+  # AIBI040M01---------------------------------end
+  # AILM010M01---------------------------------start
+  AILM010M01:
+    searchCollection:
+      type: object
+      fields:
+        - <<: *STR_YMD
+        - <<: *END_YMD
+        - name: PRS_CD_1
+          attributes:
+            type: string
+          desc: 공정코드
+          example: PRC12
+        - name: PRS_CD_4
+          attributes:
+            type: string
+          desc: 장비코드
+          example: THDP10
+    searchSensorByCollection:
+      type: object
+      fields:
+        - name: ORDER_NO
+          attributes:
+            type: string
+            format: '1: 파일명별, 0: 레시피별'
+          desc: 검색 필터조건
+          example: '1'
+        - name: FILE_SNO
+          attributes:
+            type: number
+          desc: 파일 일련번호
+          example: 420000
+        - name: LOT_NO
+          attributes:
+            type: number
+          desc: 로트 일련번호
+          example: 3016360
+        - name: PRS_CD
+          attributes:
+            type: string
+          desc: 레시피 코드
+          example: TMIL05_CH#A_ARC_SION_DEP
+        - name: SNS_CNT
+          attributes:
+            type: number
+          desc: 센서 갯수
+          example: 0
+# AILM010M01---------------------------------end

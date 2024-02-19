@@ -1,5 +1,6 @@
 import { IInfoResponseProps } from 'models';
 import { DetailResponseButton, MethodContentWrapper } from 'styles';
+import { ERROR_CODE_TEXT } from 'utils';
 
 const MethodInfoResponse = ({
   children,
@@ -7,8 +8,10 @@ const MethodInfoResponse = ({
   type,
   responses,
   selectResponseCode,
+  setselectResponseCode,
 }: IInfoResponseProps) => {
   const resKeys = Object.keys(responses).map(key => Number(key));
+  const isSelected = (code: number) => selectResponseCode === code;
 
   return (
     <MethodContentWrapper>
@@ -18,9 +21,11 @@ const MethodInfoResponse = ({
           {resKeys.map(key => (
             <DetailResponseButton
               key={key}
-              onClick={() => selectResponseCode}
+              $isError={ERROR_CODE_TEXT[key].isError}
+              $isSelect={isSelected(key)}
+              onClick={() => setselectResponseCode(key)}
             >
-              {responses[key].name}
+              {ERROR_CODE_TEXT[key].text}
             </DetailResponseButton>
           ))}
         </div>

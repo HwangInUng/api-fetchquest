@@ -91,14 +91,15 @@ export const MethodContentWrapper = styled.div`
       flex
       justify-between
       items-center
-      border-b
-      border-slate-300
       py-1
-    `}
+      h-[20px]
+      `}
   }
 
   .title {
     ${tw`
+      border-b
+      border-slate-300
       text-[0.9rem]
       text-blue-700
     `}
@@ -136,22 +137,29 @@ export const MethodContentWrapper = styled.div`
   }
 `;
 
-export const DetailResponseButton = styled.button`
+export const DetailResponseButton = styled.button<{
+  $isError: boolean;
+  $isSelect: boolean;
+}>`
   ${tw`
     bg-slate-200
     px-2
     py-1
     text-[0.7rem]
     rounded-md
-    text-green-600
     font-semibold
     border
     border-green-600
-    opacity-70 
+    opacity-60
     hover:opacity-100
     transform
     duration-150
   `}
+  ${({ $isError }) =>
+    $isError
+      ? tw`text-red-600 border-red-600`
+      : tw`text-green-600 border-green-600`}
+  ${({ $isSelect }) => $isSelect && tw`opacity-100`}
 `;
 
 export const DetailTitle = styled.div`
@@ -177,14 +185,14 @@ export const FieldInfoBox = styled.div`
     items-start
     text-[0.9rem]
     ml-4
-    mb-2
+    mt-2
     gap-x-1
   `}
 
   .field-name {
     ${tw`
       w-[30%]
-      text-[1rem]
+      text-[0.9rem]
     `}
   }
 `;

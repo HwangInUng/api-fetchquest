@@ -19,14 +19,18 @@ const MethodDetail = ({ method }: { method: ISideMethod }) => {
         type='detail'
       >
         {paramsKeys?.map(key => (
-          <DetailData detailData={method.param[key]} />
+          <DetailData
+            key={key}
+            detailData={method.param[key]}
+          />
         ))}
       </MethodInfoRequest>
       <MethodInfoResponse
         title='Response Data'
         type='detail'
         responses={method.res}
-        selectResponseCode={handleSelectResponseCode}
+        selectResponseCode={selectResponseCode}
+        setselectResponseCode={handleSelectResponseCode}
       >
         <DetailData detailData={method.res[selectResponseCode]} />
       </MethodInfoResponse>

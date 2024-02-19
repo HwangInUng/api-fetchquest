@@ -8,10 +8,13 @@ const DetailData = ({ detailData }: { detailData: IData }) => {
   const handleOpen = () => {
     setIsOpen(!isOpen);
   };
-  const isArray = detailData.type === 'array';
+  const isArray = detailData?.type === 'array';
   const dataName = isOpen
     ? `${detailData.name} -`
     : `${detailData.name} +`;
+  console.log(detailData);
+
+  if (!detailData.name) return <DetailTitle>-</DetailTitle>;
 
   return (
     <div>

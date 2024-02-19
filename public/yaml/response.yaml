@@ -1,43 +1,103 @@
 responses:
-  responseList:
-    type: array
-    fields:
-      - name: str_ymd
-        attributes:
-          type: date
-          format: YYYY-MM-DD
-        desc: 시작 일자
-        example: "2024-02-16"
-      - name: end_ymd
-        attributes:
-          type: date
-          format: YYYY-MM-DD
-        desc: 종료 일자
-        example: "2024-02-16"
-      - name: wfr_cnt
-        attributes:
-          type: number
-          format: int
-        desc: 웨이퍼 수량
-        example: 20
-  badResponse:
-    type: array
-    fields:
-      - name: str_ymd
-        attributes:
-          type: date
-          format: YYYY-MM-DD
-        desc: 시작 일자
-        example: "2024-02-16"
-      - name: end_ymd
-        attributes:
-          type: date
-          format: YYYY-MM-DD
-        desc: 종료 일자
-        example: "2024-02-16"
-      - name: wfr_cnt
-        attributes:
-          type: number
-          format: int
-        desc: 웨이퍼 수량
-        example: 20
+  # AIBI040M01---------------------------------start
+  AIBI040M01:
+    codeList:
+      type: array
+      fields:
+        - name: PRS_CD
+          attributes:
+            type: string
+          desc: 공정코드
+          example: PRC10
+        - name: PRS_CD_NM
+          attributes:
+            type: string
+          desc: 공정명
+          example: 식각
+        - name: PRS_HRK_CD
+          attributes:
+            type: string
+          desc: 상위 공정코드
+          example: PRS10
+        - name: SRT_SQN
+          attributes:
+            type: string
+          desc: 정렬순서
+          example: '100001'
+        - name: PRS_DTT_NM
+          attributes:
+            type: string
+          desc: 공정구분
+          example: 관리공정
+        - name: STR_YMD
+          attributes:
+            type: date
+            format: YYYY-MM-DD
+          desc: 시작일자
+          example: 2023-07-01
+        - name: END_YMD
+          attributes:
+            type: date
+            format: YYYY-MM-DD
+          desc: 종료 일자
+          example: 2024-02-16
+        - name: RMK_CONT
+          attributes:
+            type: string
+          desc: 비고
+          example: 기초자료
+    400-error:
+      type: object
+      fields:
+        - name: status
+          attributes:
+            type: number
+          desc: 응답 상태코드
+          example: 400
+        - name: message
+          attributes:
+            type: string
+          desc: 에러 메세지
+          example: '해당 공정코드가 이미 존재합니다.'
+  # AIBI040M01---------------------------------end
+  # AILM010M01---------------------------------start
+  AILM010M01:
+    collectionDataList:
+      type: array
+      fields:
+        - name: LOT_DATE
+          attributes:
+            type: string
+            format: YYYY-MM-DD
+          desc: 생산일자
+          example: 2023-01-02
+        - name: LOT_NO
+          attributes:
+            type: number
+          desc: 로트번호
+          example: 2339590
+        - name: PRS_CD_1
+          attributes:
+            type: string
+          desc: 관리공정
+          example: PRC10
+        - name: PRS_CD_NM_4
+          attributes:
+            type: string
+          desc: 레시피
+          example: TMIL05_CH#A_ARC_SION_DEP
+        - name: FILE_NM
+          attributes:
+            type: string
+          desc: 파일명
+          example: fdc41_TMIL05_20000101_CH#A_ARC_SION_DEP_2339590_2001020020.drs
+    sensorDataList:
+      type: array
+      fields:
+        - name: OCCR_DATE
+          attributes:
+            type: date
+            format: 'YYYY-MM-DD HH:MM:SS:ms'
+          desc: 센서 데이터 수집 시간
+          example: 2023-01-02 00:20:56:200
+  # AILM010M01---------------------------------end
