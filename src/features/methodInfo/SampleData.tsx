@@ -1,3 +1,4 @@
+import TextCopyButton from 'components/CopyButton';
 import { ISampleData } from 'models';
 import { useState } from 'react';
 import { SamplePre, SampleTitle } from 'styles';
@@ -19,10 +20,14 @@ const SampleData = ({
   };
 
   return (
-    <div>
+    <div className='relative'>
       <SampleTitle onClick={handleOpen}>
         <span>{dataName}</span>
       </SampleTitle>
+      <TextCopyButton
+        title='Sample Copy'
+        copyValue={jsonData}
+      />
       {isOpen && <SamplePre>{jsonData}</SamplePre>}
     </div>
   );

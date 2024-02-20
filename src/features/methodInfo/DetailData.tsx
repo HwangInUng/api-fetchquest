@@ -12,7 +12,6 @@ const DetailData = ({ detailData }: { detailData: IData }) => {
   const dataName = isOpen
     ? `${detailData.name} -`
     : `${detailData.name} +`;
-  console.log(detailData);
 
   if (!detailData.name) return <DetailTitle>-</DetailTitle>;
 

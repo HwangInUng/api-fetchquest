@@ -249,6 +249,7 @@ export const ArrayLabel = styled.div<{ $isArray: boolean }>`
 export const SampleTitle = styled.div`
   ${tw`
     pl-1
+    py-0.5
     text-slate-100
     text-[0.9rem]
     cursor-pointer

@@ -22,7 +22,10 @@ const MethodInfo = ({
           <div className='type'>{method.method}</div>
           <span className='name'>{method.name}</span>
         </div>
-        <MethodDescription description={method.description} />
+        <MethodDescription
+          description={method.description}
+          url='test'
+        />
         <MethodDetail method={method} />
         <MethodSample method={method} />
       </MethodInfoBox>

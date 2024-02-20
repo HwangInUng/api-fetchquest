@@ -26,3 +26,21 @@ export const ContentContainer = styled.div`
     overflow-y-scroll
   `}
 `;
+
+export const CopyButton = styled.button`
+  ${tw`
+    absolute
+    top-0
+    right-0
+    text-slate-300
+    text-[0.9rem]
+    py-0.5
+    px-2
+    opacity-70
+    rounded-lg
+    hover:bg-slate-950
+    hover:opacity-100
+    transform
+    duration-150
+  `}
+`;
