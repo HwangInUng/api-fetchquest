@@ -3,8 +3,9 @@ import { styled } from 'styled-components';
 
 export const MethodInfoContainer = styled.div`
   ${tw`
-    w-[65%]
-    px-2
+    lg:w-[65%]
+    w-full
+    lg:px-2
   `}
 
   .category-name {
@@ -142,7 +143,7 @@ export const DetailResponseButton = styled.button<{
   $isSelect: boolean;
 }>`
   ${tw`
-    bg-slate-200
+    bg-slate-100
     px-2
     py-1
     text-[0.7rem]

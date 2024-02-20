@@ -24,6 +24,13 @@ RMK_CONT: &RMK_CONT
       type: string
     desc: 비고
     example: 기초자료
+USE_YN: &USE_YN
+  - name: USE_YN
+    attributes:
+      type: string
+      format: 'Y: 사용, N: 미사용'
+    desc: 모니터링 사용여부
+    example: 'Y'
 
 responses:
   # AIBI040M01---------------------------------start
@@ -369,12 +376,7 @@ responses:
             type: number
           desc: 불량 웨이퍼 수량
           example: 370
-        - name: USE_YN
-          attributes:
-            type: string
-            format: 'Y: 사용, N: 미사용'
-          desc: 모니터링 사용여부
-          example: 'Y'
+        - <<: *USE_YN
         - name: MDL_FILE_YN
           attributes:
             type: string
@@ -431,12 +433,7 @@ responses:
             type: number
           desc: 학습 일련번호(가장 최신)
           example: 56
-        - name: USE_YN
-          attributes:
-            type: string
-            format: 'Y: 사용, N: 미사용'
-          desc: 모니터링 사용여부
-          example: 'Y'
+        - <<: *USE_YN
         - name: WFR_CNT
           attributes:
             type: number
@@ -448,3 +445,229 @@ responses:
           desc: 불량웨이퍼 수량
           example: 370
   # AILM050M01---------------------------------end
+  # AIPM060M01---------------------------------start
+  AIPM060M01:
+    monitorList:
+      type: array
+      fields:
+        - name: PRS_CD
+          attributes:
+            type: string
+          desc: 레시피 코드
+          example: TMIL05_CH#A_ARC-SION-DEP
+        - name: PRS_CD_NM
+          attributes:
+            type: string
+          desc: 레시피명
+          example: TMIL05_CH#A_ARC-SION-DEP
+        - name: MNT_NM
+          attributes:
+            type: string
+          desc: 모니터링명
+          example: THDP10_CH#A_C5IMDA-DEP
+        - name: LRN_SNO
+          attributes:
+            type: number
+            format: 'number or null'
+          desc: 모니터링 등록된 학습 일련번호
+          example: 3
+        - <<: *USE_YN
+        - <<: *RMK_CONT
+    learnList:
+      type: array
+      fields:
+        - name: LRN_SNO
+          attributes:
+            type: number
+          desc: 모니터링 결과 학습 일련번호
+          example: 120
+        - name: MNT_LRN_SNO
+          attributes:
+            type: number
+          desc: 모니터링 학습 일련번호
+          example: 120
+        - name: STS_FLAG
+          attributes:
+            type: string
+            format: 'C: 정상완료, S: 예약, E: 오류'
+          desc: 학습 상태코드
+          example: '정상완료'
+        - name: WFR_CNT
+          attributes:
+            type: number
+          desc: 웨이퍼 수량
+          example: 5
+        - name: ERR_WFR_CNT
+          attributes:
+            type: number
+          desc: 불량 웨이퍼 수량
+          example: 5
+        - name: MDL_F1SC
+          attributes:
+            type: number
+            format: numeric(10, 6)
+          desc: F1 스코어
+          example: 23.02
+        - name: CHK_LRN
+          attributes:
+            type: string
+            format: '1: 선택, 0: 미선택'
+          desc: 학습일련번호 선택 여부
+          example: '1'
+  # AIPM060M01---------------------------------end
+  # AIPM020M01---------------------------------start
+  AIPM020M01:
+    errorWaferList:
+      type: array
+      fields:
+        - name: ERR_WFR_NO
+          attributes:
+            type: number
+          desc: 이상 웨이퍼 일련번호
+          example: 22
+        - name: TIME
+          attributes:
+            type: string
+            format: YYYY-MM-DD HH:MM:SS:ms
+          desc: 작업 기간
+          example: '2023-01-01 01:01:10:200'
+        - name: LOT_NO
+          attributes:
+            type: string
+          desc: 로트 일련번호
+          example: '3016360'
+        - name: CHB_CD
+          attributes:
+            type: string
+          desc: 챔버 코드
+          example: CH#B
+        - name: RCP_CD
+          attributes:
+            type: string
+          desc: 레시피 코드
+          example: H28NA-M1
+        - name: PRS_CD
+          attributes:
+            type: string
+          desc: 공정코드(액션레시피)
+          example: EDPS01_CH#B_H28NA-M1
+        - name: MNT_SNS_SNO
+          attributes:
+            type: number
+          desc: 모니터링 센서 일련번호
+          example: 1
+        - name: FILE_SNO
+          attributes:
+            type: number
+          desc: 파일 일련번호
+          example: 428964
+    sensorList:
+      type: array
+      fields:
+        - name: SNS_CD
+          attributes:
+            type: number
+          desc: 센서 코드
+          example: 1
+        - name: SNS_NM
+          attributes:
+            type: string
+          desc: 센서 이름
+          example: CHAMBER CAPACITIVE MANOMETER
+        - name: SNS_VAL
+          attributes:
+            type: number
+          desc: 센서 스코어
+          example: 43.23324
+  # AIPM020M01---------------------------------end
+  # AIPM030M03---------------------------------start
+  AIPM030M03:
+    errorLotList:
+      type: array
+      fields:
+        - name: TIME
+          attributes:
+            type: string
+            format: YYYY-MM-DD HH:MM:SS
+          desc: 작업일시
+          example: '2023-01-01 01:01:10'
+        - name: LOT_NO
+          attributes:
+            type: string
+          desc: 로트번호
+          example: '3001690'
+    errorWaferList:
+      type: array
+      fields:
+        - name: ERR_WFR_NO
+          attributes:
+            type: number
+          desc: 이상 웨이퍼 일련번호
+          example: 22
+        - name: TIME
+          attributes:
+            type: string
+            format: YYYY-MM-DD HH:MM:SS:ms
+          desc: 작업 기간
+          example: '2023-01-01 01:01:10:200'
+        - name: LOT_NO
+          attributes:
+            type: string
+          desc: 로트 일련번호
+          example: '3016360'
+        - name: CHB_CD
+          attributes:
+            type: string
+          desc: 챔버 코드
+          example: CH#B
+        - name: RCP_CD
+          attributes:
+            type: string
+          desc: 레시피 코드
+          example: H28NA-M1
+        - name: PRS_CD
+          attributes:
+            type: string
+          desc: 공정코드(액션레시피)
+          example: EDPS01_CH#B_H28NA-M1
+        - name: MNT_SNS_SNO
+          attributes:
+            type: number
+          desc: 모니터링 센서 일련번호
+          example: 1
+        - name: TM
+          attributes:
+            type: string
+            format: '#ff0000'
+          desc: 툴 매칭 결과(결과 색상을 반환)
+          example: '#fc140c'
+        - name: FILE_SNO
+          attributes:
+            type: number
+          desc: 파일 일련번호
+          example: 428964
+    sensorList:
+      type: array
+      fields:
+        - name: SNS_CD
+          attributes:
+            type: number
+          desc: 센서 코드
+          example: 1
+        - name: SNS_NM
+          attributes:
+            type: string
+          desc: 센서 이름
+          example: CHAMBER CAPACITIVE MANOMETER
+        - name: SNS_VAL
+          attributes:
+            type: number
+          desc: 센서 스코어
+          example: 43.23324
+        - name: TM
+          attributes:
+            type: string
+            format: '#ff0000'
+          desc: 툴 매칭 결과(결과 색상을 반환)
+          example: '#fc140c'
+# AIPM030M03---------------------------------end

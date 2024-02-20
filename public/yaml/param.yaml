@@ -17,6 +17,7 @@ ROWTYPE: &ROWTYPE
     attributes:
       type: number
       format: '0: -, 1:추가, 2:수정, 3:삭제'
+      required: true
     desc: 행의 유형
     example: 1
 RMK_CONT: &RMK_CONT
@@ -297,4 +298,311 @@ params:
       fields:
         - <<: *STR_YMD
         - <<: *END_YMD
-# AILM050M01---------------------------------end
+    learnList:
+      type: array
+      fields:
+        - name: LRN_SNO
+          attributes:
+            type: number
+            required: true
+          desc: 학습 일련번호
+          example: 56
+        - name: LRN_NM
+          attributes:
+            type: number
+          desc: 학습 제목
+          example: 시범사업 모델
+        - name: LRN_STR_DATE
+          attributes:
+            type: string
+            format: YYYY-MM-DD
+          desc: 학습 시작일자
+          example: '2023-01-01'
+        - name: LRN_END_DATE
+          attributes:
+            type: string
+            format: YYYY-MM-DD
+          desc: 학습 종료일자
+          example: '2023-01-02'
+        - name: ALG_CD
+          attributes:
+            type: string
+          desc: 알고리즘 코드
+          example: '0005'
+        - name: WIN_SZ
+          attributes:
+            type: number
+          desc: 윈도우 사이즈
+          example: 5
+        - name: STS_FLAG
+          attributes:
+            type: string
+            format: 'C: 정상완료, S: 예약, E: 오류'
+          desc: 학습 상태코드
+          example: '정상완료'
+        - name: SCH_DATE
+          attributes:
+            type: date
+            format: YYYY-MM-DD HH:MM
+          desc: 실행 예약시간
+          example: '2023-01-01 01:01'
+        - name: SCH_RDO
+          attributes:
+            type: string
+            format: '1: 즉시실행, 2: 예약'
+          desc: 예약 여부
+          example: '1'
+        - <<: *RMK_CONT
+        - <<: *ROWTYPE
+    recipeList:
+      type: array
+      fields:
+        - name: PRS_CD
+          attributes:
+            type: string
+          desc: 공정코드
+          example: TMIL05_CH#D_ARC330-DEP
+        - name: LRN_SNO
+          attributes:
+            type: number
+          desc: 학습 일련번호
+          example: 56
+        - name: WFR_CNT
+          attributes:
+            type: number
+          desc: 웨이퍼 총 수량
+          example: 40303
+        - name: ERR_WFR_CNT
+          attributes:
+            type: number
+          desc: 불량 웨이퍼 수량
+          example: 370
+        - name: STS_FLAG
+          attributes:
+            type: string
+            format: 'C: 정상완료, S: 예약, E: 오류'
+          desc: 학습 상태
+          example: '정상완료'
+        - name: MDL_ACCU
+          attributes:
+            type: number
+            format: numeric(10, 6)
+          desc: 학습 정확도
+          example: 20.02
+        - name: MDL_PREC
+          attributes:
+            type: number
+            format: numeric(10, 6)
+          desc: 학습 정밀도
+          example: 20.01
+        - name: MDL_RECL
+          attributes:
+            type: number
+            format: numeric(10, 6)
+          desc: 학습 재현성
+          example: 20.02
+        - name: MDL_F1SC
+          attributes:
+            type: number
+            format: numeric(10, 6)
+          desc: F1 스코어
+          example: 23.02
+        - <<: *RMK_CONT
+    registMonitor:
+      type: object
+      fields:
+        - name: LRN_SNO
+          attributes:
+            type: string
+            format: 'number or null'
+          desc: 학습 일련번호
+          example: '56'
+        - name: PRS_CD
+          attributes:
+            type: string
+          desc: 공정코드
+          example: TMIL05_CH#D_ARC330-DEP
+    activearteMonitor:
+      type: object
+      fields:
+        - name: USE_YN
+          attributes:
+            type: string
+            format: 'Y: 활성화, N: 비활성화'
+          desc: 모니터링 활성 여부
+          example: 'Y'
+        - name: LRN_SNO
+          attributes:
+            type: string
+            format: 'number or null'
+          desc: 학습 일련번호
+          example: '56'
+        - name: PRS_CD
+          attributes:
+            type: string
+          desc: 공정코드
+          example: TMIL05_CH#D_ARC330-DEP
+  # AILM050M01---------------------------------end
+  # AIPM060M01---------------------------------start
+  AIPM060M01:
+    searchMonitor:
+      type: object
+      fields:
+        - name: PRS_CD_1
+          attributes:
+            type: string
+          desc: 공정코드
+          example: PRC12
+        - name: PRS_CD_4
+          attributes:
+            type: string
+          desc: 레시피 코드
+          example: TMIL05_CH#A_ARC-SION-DEP
+    searchLearn:
+      type: object
+      fields:
+        - name: PRS_CD
+          attributes:
+            type: string
+            required: true
+          desc: 레시피 코드
+          example: TMIL05_CH#A_ARC-SION-DEP
+    monitorList:
+      type: array
+      fields:
+        - <<: *ROWTYPE
+        - name: PRS_CD
+          attributes:
+            type: string
+            required: true
+          desc: 레시피 코드
+          example: TMIL05_CH#A_ARC-SION-DEP
+        - name: MNT_NM
+          attributes:
+            type: string
+          desc: 모니터링명
+          example: THDP10_CH#A_C5IMDA-DEP
+        - name: LRN_SNO
+          attributes:
+            type: number
+          desc: 학습 일련번호
+          example: 3
+        - name: USE_YN
+          attributes:
+            type: string
+            format: 'Y: 사용, N: 미사용'
+          desc: 모니터링 사용여부
+          example: 'Y'
+        - <<: *RMK_CONT
+  # AIPM060M01---------------------------------end
+  # AIPM020M01---------------------------------start
+  AIPM020M01:
+    searchErrorWafer:
+      type: object
+      fields:
+        - name: EQP_CD
+          attributes:
+            type: string
+            required: true
+          desc: 장비 일련번호
+          example: ECTR03
+        - name: FROM_DATE
+          attributes:
+            type: string
+            required: true
+            format: YYYY-MM-DD HH:MM:SS:ms
+          desc: 조회 시작시간
+          example: '2023-01-01 01:01:10:200'
+        - name: TO_DATE
+          attributes:
+            type: string
+            required: true
+            format: YYYY-MM-DD HH:MM:SS:ms
+          desc: 조회 종료시간
+          example: '2023-01-02 01:01:10:200'
+    searchErrorSensor:
+      type: object
+      fields:
+        - name: MNT_SNS_SNO
+          attributes:
+            type: number
+            required: true
+          desc: 모니터링 센서 일련번호
+          example: 1
+        - name: PRS_CD
+          attributes:
+            type: string
+            required: true
+          desc: 공정코드
+          example: TMIL05_CH#A_ARC330-DEP
+# AIPM020M01---------------------------------end
+# AIPM030M03---------------------------------start
+  AIPM030M03:
+    searchErrorLot:
+      type: object
+      fields:
+        - name: EQP_CD
+          attributes:
+            type: string
+            required: true
+          desc: 장비 일련번호
+          example: ECTR03
+        - name: FROM_DATE
+          attributes:
+            type: string
+            required: true
+            format: YYYY-MM-DD HH:MM:SS:ms
+          desc: 조회 시작시간
+          example: '2023-01-01 01:01:10:200'
+        - name: TO_DATE
+          attributes:
+            type: string
+            required: true
+            format: YYYY-MM-DD HH:MM:SS:ms
+          desc: 조회 종료시간
+          example: '2023-01-02 01:01:10:200'
+    searchErrorWafer:
+      type: object
+      fields:
+        - name: EQP_CD
+          attributes:
+            type: string
+            required: true
+          desc: 장비 일련번호
+          example: ECTR03
+        - name: FROM_DATE
+          attributes:
+            type: string
+            required: true
+            format: YYYY-MM-DD HH:MM:SS:ms
+          desc: 조회 시작시간
+          example: '2023-01-01 01:01:10:200'
+        - name: TO_DATE
+          attributes:
+            type: string
+            required: true
+            format: YYYY-MM-DD HH:MM:SS:ms
+          desc: 조회 종료시간
+          example: '2023-01-02 01:01:10:200'
+        - name: LOT_NO
+          attributes:
+            type: string
+            required: true
+          desc: 로트 일련번호
+          example: '3001690'
+    searchErrorSensor:
+      type: object
+      fields:
+        - name: MNT_SNS_SNO
+          attributes:
+            type: number
+            required: true
+          desc: 모니터링 센서 일련번호
+          example: 1
+        - name: PRS_CD
+          attributes:
+            type: string
+            required: true
+          desc: 공정코드
+          example: TMIL05_CH#A_ARC330-DEP
+# AIPM030M03---------------------------------end

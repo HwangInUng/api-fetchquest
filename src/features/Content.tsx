@@ -33,14 +33,16 @@ const Content = (): JSX.Element => {
       {methods.map((method, index) => (
         <div
           key={method.name}
-          className='flex border-b'
+          className='flex border-b lg:flex-row flex-col lg:p-0 px-2 py-1'
           id={method.name}
         >
           <MethodInfo
             method={method}
             methodIndex={index}
           />
-          <div className='bg-slate-700 flex-grow'></div>
+          <div className='bg-slate-700 flex-grow rounded-lg lg:rounded-none'>
+            test
+          </div>
         </div>
       ))}
     </ContentContainer>

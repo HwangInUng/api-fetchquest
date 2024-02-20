@@ -47,7 +47,7 @@ const Home = () => {
     );
 
   return (
-    <div className='flex h-screen w-screen'>
+    <div className='flex h-screen w-screen lg:flex-row flex-col'>
       <SideMenu />
       <Content />
     </div>

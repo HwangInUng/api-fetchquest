@@ -5,8 +5,10 @@ export const SideMenuContainer = styled.div`
   box-shadow: 0 0 7px rgba(23, 37, 84, 0.6);
   ${tw`
     bg-slate-50
-    w-[250px]
-    h-full
+    lg:w-[250px]
+    lg:h-full
+    w-full
+    h-[300px]
     flex
     flex-col
     rounded-r-lg
