@@ -4,14 +4,27 @@ STR_YMD: &STR_YMD
       type: date
       format: YYYY-MM-DD
     desc: 시작일자
-    example: 2023-07-01
+    example: '2023-07-01'
 END_YMD: &END_YMD
   - name: END_YMD
     attributes:
       type: date
       format: YYYY-MM-DD
     desc: 종료일자
-    example: 2023-07-10
+    example: '2023-07-10'
+ROWTYPE: &ROWTYPE
+  - name: ROWTYPE
+    attributes:
+      type: number
+      format: '0: -, 1:추가, 2:수정, 3:삭제'
+    desc: 행의 유형
+    example: 1
+RMK_CONT: &RMK_CONT
+  - name: RMK_CONT
+    attributes:
+      type: string
+    desc: 비고
+    example: 기초자료
 
 params:
   # AIBI040M01---------------------------------start
@@ -66,12 +79,7 @@ params:
             type: string
           desc: 비고
           example: 기초자료
-        - name: ROW_TYPE
-          attributes:
-            type: number
-            format: '0: -, 1:추가, 2:수정, 3:삭제'
-          desc: 행의 유형
-          example: 1
+        - <<: *ROWTYPE
   # AIBI040M01---------------------------------end
   # AILM010M01---------------------------------start
   AILM010M01:
@@ -90,6 +98,30 @@ params:
             type: string
           desc: 장비코드
           example: THDP10
+    searchSensorHeader:
+      type: object
+      fields:
+        - name: LOT_NO
+          attributes:
+            type: string
+          desc: 로트번호
+          example: '3016360'
+        - name: PRS_CD
+          attributes:
+            type: string
+          desc: 레피시
+          example: TMIL05_CH#C_IDLE PURGE
+        - name: ORDER_NO
+          attributes:
+            type: string
+            format: '1: 파일명별, 0: 레시피별'
+          desc: 검색 필터조건
+          example: '1'
+        - name: FILE_SNO
+          attributes:
+            type: number
+          desc: 파일 일련번호
+          example: 428964
     searchSensorByCollection:
       type: object
       fields:
@@ -106,9 +138,9 @@ params:
           example: 420000
         - name: LOT_NO
           attributes:
-            type: number
+            type: string
           desc: 로트 일련번호
-          example: 3016360
+          example: '3016360'
         - name: PRS_CD
           attributes:
             type: string
@@ -119,4 +151,150 @@ params:
             type: number
           desc: 센서 갯수
           example: 0
-# AILM010M01---------------------------------end
+  # AILM010M01---------------------------------end
+  # AILM020M01---------------------------------start
+  AILM020M01:
+    searchProcess:
+      type: object
+      fields:
+        - name: PRS_CD_01
+          attributes:
+            type: string
+            required: true
+          desc: 공정코드
+          example: PRC10
+        - name: PRS_CD_02
+          attributes:
+            type: string
+          desc: 장비코드
+          example: THDP10
+    searchSensor:
+      type: object
+      fields:
+        - name: PRS_CD
+          attributes:
+            type: string
+            required: true
+          desc: 공정코드
+          example: THDP10_CH#D
+    sensorList:
+      type: array
+      fields:
+        - name: PRS_CD
+          attributes:
+            type: string
+            required: true
+          desc: 공정코드
+          example: THDP10_CH#D
+        - name: SNS_CD
+          attributes:
+            type: string
+            required: true
+          desc: 센서코드
+          example: WAFER TEMPERATURE
+        - name: SNS_NM
+          attributes:
+            type: string
+            required: true
+          desc: 센서명칭
+          example: WAFER TEMPERATURE
+        - <<: *ROWTYPE
+        - <<: *RMK_CONT
+        - name: GRP_NO
+          attributes:
+            type: number
+          desc: 그룹코드
+          example: 0
+  # AILM020M01---------------------------------end
+  # AILM060M01---------------------------------start
+  AILM060M01:
+    searchError:
+      type: object
+      fields:
+        - name: PRS_CD_1
+          attributes:
+            type: string
+          desc: 공정코드
+          example: PRC10
+        - name: PRS_CD_2
+          attributes:
+            type: string
+          desc: 장비코드
+          example: ECTR03
+        - name: PRS_CD_3
+          attributes:
+            type: string
+          desc: 챔버코드
+          example: ECTR03_CH#A
+        - <<: *STR_YMD
+    errorList:
+      type: array
+      fields:
+        - <<: *ROWTYPE
+        - name: ERR_NM
+          attributes:
+            type: string
+          desc: 불량명
+          example: 000 이상
+        - name: ERR_STR_DATE
+          attributes:
+            type: string
+            format: YYYY-MM-DD HH:MM:SS:ms
+            required: true
+          desc: 불량 발생시각
+          example: '2024-01-15 00:00:00.000'
+        - name: ERR_END_DATE
+          attributes:
+            type: string
+            format: YYYY-MM-DD HH:MM:SS:ms
+            required: true
+          desc: 불량 종료시각
+          example: '2024-01-15 02:02:00.000'
+        - name: PRS_CD
+          attributes:
+            type: string
+            required: true
+          desc: 챔버코드
+          example: ECTR03_CH#A
+        - name: ERR_WFR_CNT
+          attributes:
+            type: number
+          desc: 불량 웨이퍼 수량
+          example: 5
+        - name: ACT_CONT
+          attributes:
+            type: string
+          desc: 사후조치 내용
+          example: ...조치완료
+        - <<: *RMK_CONT
+  # AILM060M01---------------------------------end
+  # AILM050M01---------------------------------start
+  AILM050M01:
+    searchLearn:
+      type: object
+      fields:
+        - name: PRS_CD_1
+          attributes:
+            type: string
+          desc: 공정코드
+          example: PRC12
+    searchRecipe:
+      type: object
+      fields:
+        - name: LRN_SNO
+          attributes:
+            type: number
+            required: true
+          desc: 학습 일련번호
+          example: 56
+        - name: PRS_CD
+          attributes:
+            type: string
+          desc: 공정코드
+          example: PRC12
+    searchNewRecipe:
+      type: object
+      fields:
+        - <<: *STR_YMD
+        - <<: *END_YMD
+# AILM050M01---------------------------------end

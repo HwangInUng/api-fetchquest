@@ -191,8 +191,8 @@ export const FieldInfoBox = styled.div`
 
   .field-name {
     ${tw`
-      w-[30%]
-      text-[0.9rem]
+      w-[35%]
+      text-[0.8rem]
     `}
   }
 `;

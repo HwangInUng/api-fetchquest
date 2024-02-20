@@ -1,3 +1,30 @@
+STR_YMD: &STR_YMD
+  - name: STR_YMD
+    attributes:
+      type: string
+      format: YYYY-MM-DD
+    desc: 시작일자
+    example: '2023-07-01'
+END_YMD: &END_YMD
+  - name: END_YMD
+    attributes:
+      type: string
+      format: YYYY-MM-DD
+    desc: 종료일자
+    example: '2023-07-10'
+SRT_SQN: &SRT_SQN
+  - name: SRT_SQN
+    attributes:
+      type: string
+    desc: 정렬순서
+    example: '100001'
+RMK_CONT: &RMK_CONT
+  - name: RMK_CONT
+    attributes:
+      type: string
+    desc: 비고
+    example: 기초자료
+
 responses:
   # AIBI040M01---------------------------------start
   AIBI040M01:
@@ -19,11 +46,7 @@ responses:
             type: string
           desc: 상위 공정코드
           example: PRS10
-        - name: SRT_SQN
-          attributes:
-            type: string
-          desc: 정렬순서
-          example: '100001'
+        - <<: *SRT_SQN
         - name: PRS_DTT_NM
           attributes:
             type: string
@@ -41,11 +64,7 @@ responses:
             format: YYYY-MM-DD
           desc: 종료 일자
           example: 2024-02-16
-        - name: RMK_CONT
-          attributes:
-            type: string
-          desc: 비고
-          example: 기초자료
+        - <<: *RMK_CONT
     400-error:
       type: object
       fields:
@@ -73,9 +92,9 @@ responses:
           example: 2023-01-02
         - name: LOT_NO
           attributes:
-            type: number
+            type: string
           desc: 로트번호
-          example: 2339590
+          example: '2339590'
         - name: PRS_CD_1
           attributes:
             type: string
@@ -91,6 +110,25 @@ responses:
             type: string
           desc: 파일명
           example: fdc41_TMIL05_20000101_CH#A_ARC_SION_DEP_2339590_2001020020.drs
+    sensorColumn:
+      type: object
+      fields:
+        - name: FILE_SNO
+          attributes:
+            type: string
+          desc: 파일 일련번호
+          example: '428964'
+        - name: SNM_ARR
+          attributes:
+            type: string
+            format: 'name1, name2, name3...'
+          desc: 센서데이터 컬럼명(구분자(',')를 통한 분리 필요)
+          example: Chamber capacitive manometer,chbr back pres/frln tc pres...
+        - name: SNM_CNT
+          attributes:
+            type: number
+          desc: 센서데이터 컬럼 갯수
+          example: 4
     sensorDataList:
       type: array
       fields:
@@ -101,3 +139,312 @@ responses:
           desc: 센서 데이터 수집 시간
           example: 2023-01-02 00:20:56:200
   # AILM010M01---------------------------------end
+  # AILM020M01---------------------------------start
+  AILM020M01:
+    processList:
+      type: array
+      fields:
+        - name: PRS_CD
+          attributes:
+            type: string
+          desc: 검색 조건에 사용된 공정코드의 하위 공정코드
+          example: THDP10_CH#A
+        - name: PRS_CD_NM
+          attributes:
+            type: string
+          desc: 하위 공정코드명
+          example: TMIL05_CH#A_ARC-SION-DEP
+        - name: PRS_HRK_CD
+          attributes:
+            type: string
+          desc: 상위 공정코드
+          example: PRC12
+        - name: PRS_DTT_CD
+          attributes:
+            type: string
+          desc: 공정 구분코드
+          example: '1000'
+        - name: PRS_DTT_NM
+          attributes:
+            type: string
+          desc: 공정 구분코드명
+          example: THDP10
+        - <<: *SRT_SQN
+        - <<: *STR_YMD
+        - <<: *END_YMD
+        - <<: *RMK_CONT
+        - name: CEN_CNT
+          attributes:
+            type: number
+          desc: 해당 공정의 센서 수
+          example: 5
+    sensorList:
+      type: array
+      fields:
+        - name: PRS_CD
+          attributes:
+            type: string
+          desc: 센서의 상위 공정코드
+          example: THDP10_CH#A
+        - name: SNS_CD
+          attributes:
+            type: string
+          desc: 센서코드
+          example: WAFER TEMPERATURE
+        - name: SNS_NM
+          attributes:
+            type: string
+          desc: 센서명칭
+          example: WAFER TEMPERATURE
+        - name: GRP_NO
+          attributes:
+            type: number
+          desc: 그룹번호
+          example: 0
+        - <<: *RMK_CONT
+        - name: REGR_ID
+          attributes:
+            type: string
+          desc: 등록자아이디
+          example: '-'
+        - name: REGR_DATE
+          attributes:
+            type: string
+            format: YYYY-MM-DD HH:MM:SS
+          desc: 등록일시
+          example: '2023-01-02 02:02:10'
+  # AILM020M01---------------------------------end
+  # AILM060M01---------------------------------start
+  AILM060M01:
+    errorList:
+      type: array
+      fields:
+        - name: ERR_SNO
+          attributes:
+            type: number
+          desc: 불량 일련번호
+          example: 5
+        - name: ERR_DATE
+          attributes:
+            type: string
+            format: YYYY-MM-DD HH:MM:SS:ms
+          desc: 불량 발생기간
+          example: '2024-01-15 02:02:00.000 ~ 2024-01-15 02:02:00.000'
+        - name: ERR_NM
+          attributes:
+            type: string
+          desc: 불량명
+          example: 000 이상
+        - name: PRS_CD
+          attributes:
+            type: string
+          desc: 챔버코드
+          example: ECTR03_CH#A
+        - name: ACT_CONT
+          attributes:
+            type: string
+          desc: 사후조치 내용
+          example: ...조치완료
+        - <<: *RMK_CONT
+        - name: ERR_WFR_CNT
+          attributes:
+            type: number
+          desc: 불량 웨이퍼 수량
+          example: 5
+  # AILM060M01---------------------------------end
+  # AILM050M01---------------------------------end
+  AILM050M01:
+    learnList:
+      type: array
+      fields:
+        - name: LRN_SNO
+          attributes:
+            type: number
+          desc: 학습 일련번호
+          example: 56
+        - name: LRN_NM
+          attributes:
+            type: number
+          desc: 학습 제목
+          example: 시범사업 모델
+        - name: LRN_STR_DATE
+          attributes:
+            type: string
+            format: YYYYMMDD
+          desc: 학습 시작일자
+          example: '20230101'
+        - name: LRN_END_DATE
+          attributes:
+            type: string
+            format: YYYYMMDD
+          desc: 학습 종료일자
+          example: '20230102'
+        - name: LRN_DATE
+          attributes:
+            type: string
+            format: YYYY-MM-DD
+          desc: 학습 기간
+          example: '2023-01-02 ~ 2023-01-03'
+        - name: ALG_CD
+          attributes:
+            type: string
+          desc: 알고리즘 코드
+          example: '0005'
+        - name: WIN_SZ
+          attributes:
+            type: number
+          desc: 윈도우 사이즈
+          example: 5
+        - name: SCH_DATE
+          attributes:
+            type: date
+            format: YYYY-MM-DD HH:MM:SS:ms
+          desc: 실행 예약시간
+          example: '2023-01-01 01:01:10:200'
+        - name: SCH_RDO
+          attributes:
+            type: string
+            format: '1: 즉시실행, 2: 예약실행'
+          desc: 예약 여부
+          example: '1'
+        - name: STS_FLAG
+          attributes:
+            type: string
+            format: 'C: 정상완료, S: 예약, E: 오류'
+          desc: 학습 상태코드
+          example: '정상완료'
+        - name: LRN_CNT
+          attributes:
+            type: string
+          desc: 학습 완료여부
+          example: Y
+        - name: WFR_CNT
+          attributes:
+            type: number
+          desc: 학습한 웨이퍼 수량
+          example: 6700
+        - name: RCP_CNT
+          attributes:
+            type: number
+          desc: 학습한 레시피 수량
+          example: 17
+        - <<: *RMK_CONT
+    recipeList:
+      type: array
+      fields:
+        - name: PRS_CD
+          attributes:
+            type: string
+          desc: 공정코드
+          example: TMIL05_CH#D_ARC330-DEP
+        - name: LRN_SNO
+          attributes:
+            type: number
+          desc: 학습 일련번호
+          example: 56
+        - name: MNT_LRN_SNO
+          attributes:
+            type: number
+            format: 'number or null'
+          desc: 모니터링에 등록된 학습 일련번호
+          example: 56
+        - name: MNT_LRN_YN
+          attributes:
+            type: string
+            format: 'Y: 등록, N: 미등록'
+          desc: 모니터링 등록여부
+          example: 'Y'
+        - name: MNT_LRN_YN_LRN_SNO
+          attributes:
+            type: number
+          desc: 모니터링에 등록된 학습 일련번호
+          example: 56
+        - name: WFR_CNT
+          attributes:
+            type: number
+          desc: 학습된 웨이퍼 총수량
+          example: 40303
+        - name: ERR_WFR_CNT
+          attributes:
+            type: number
+          desc: 불량 웨이퍼 수량
+          example: 370
+        - name: USE_YN
+          attributes:
+            type: string
+            format: 'Y: 사용, N: 미사용'
+          desc: 모니터링 사용여부
+          example: 'Y'
+        - name: MDL_FILE_YN
+          attributes:
+            type: string
+            format: '1: 존재, 2: -'
+          desc: MDL 파일 존재여부
+          example: '1'
+        - name: STS_FLAG
+          attributes:
+            type: string
+            format: 'C: 정상완료, S: 예약, E: 오류'
+          desc: 학습 상태
+          example: '정상완료'
+        - name: MDL_ACCU
+          attributes:
+            type: number
+            format: numeric(10, 6)
+          desc: 학습 정확도
+          example: 20.02
+        - name: MDL_PREC
+          attributes:
+            type: number
+            format: numeric(10, 6)
+          desc: 학습 정밀도
+          example: 20.01
+        - name: MDL_RECL
+          attributes:
+            type: number
+            format: numeric(10, 6)
+          desc: 학습 재현성
+          example: 20.02
+        - name: MDL_F1SC
+          attributes:
+            type: number
+            format: numeric(10, 6)
+          desc: F1 스코어
+          example: 23.02
+        - <<: *RMK_CONT
+    newRecipeList:
+      type: array
+      fields:
+        - name: CHK
+          attributes:
+            type: string
+            format: '1: 체크, 2: -'
+          desc: 레시피 등록 여부
+          example: '1'
+        - name: PRS_CD
+          attributes:
+            type: string
+          desc: 공정코드
+          example: TMIL05_CH#D_ARC330-DEP
+        - name: LRN_SNO
+          attributes:
+            type: number
+          desc: 학습 일련번호(가장 최신)
+          example: 56
+        - name: USE_YN
+          attributes:
+            type: string
+            format: 'Y: 사용, N: 미사용'
+          desc: 모니터링 사용여부
+          example: 'Y'
+        - name: WFR_CNT
+          attributes:
+            type: number
+          desc: 웨이퍼 수량
+          example: 40303
+        - name: ERR_WFR_CNT
+          attributes:
+            type: number
+          desc: 불량웨이퍼 수량
+          example: 370
+  # AILM050M01---------------------------------end

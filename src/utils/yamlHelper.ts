@@ -52,12 +52,13 @@ export function separateMethodList(
           [param.name]: { ...currentParams[param.name], name: param.name },
         }),
     );
-    method?.res?.forEach(res => {
-      methodRes = {
-        ...methodRes,
-        [res.code]: { ...currentResponses[res.name], name: res.name },
-      };
-    });
+    method?.res?.forEach(
+      res =>
+        (methodRes = {
+          ...methodRes,
+          [res.code]: { ...currentResponses[res.name], name: res.name },
+        }),
+    );
 
     return { ...method, param: methodParam, res: methodRes };
   });
