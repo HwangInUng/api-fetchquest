@@ -4,6 +4,7 @@ import { ContentContainer } from 'styles';
 import MethodInfo from './methodInfo/MethodInfo';
 import { useEffect, useRef } from 'react';
 import { selectMethodByScroll } from 'utils';
+import MethodTest from './methodTest/MethodTest';
 
 const Content = (): JSX.Element => {
   const methods = useRecoilValue(
@@ -40,9 +41,7 @@ const Content = (): JSX.Element => {
             method={method}
             methodIndex={index}
           />
-          <div className='bg-slate-700 flex-grow rounded-lg lg:rounded-none'>
-            test
-          </div>
+          <MethodTest />
         </div>
       ))}
     </ContentContainer>

@@ -17,3 +17,13 @@ export const ERROR_CODE_TEXT: {
   404: { text: '404: Not Found', isError: true },
   405: { text: '405: Method Not Allowed', isError: true },
 };
+
+// test property
+export const METHOD_TYPE_BUTTONS: { name: string; color: string }[] = [
+  { name: 'GET', color: 'text-blue-400' },
+  { name: 'POST', color: 'text-green-400' },
+  { name: 'PUT', color: 'text-red-400' },
+  { name: 'DELETE', color: 'text-purple-400' },
+];
+
+export const TEST_FORM_TABS: string[] = ['Params', 'raw'];

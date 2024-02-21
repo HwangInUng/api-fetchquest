@@ -64,13 +64,13 @@ responses:
             type: date
             format: YYYY-MM-DD
           desc: 시작일자
-          example: 2023-07-01
+          example: '2023-07-01'
         - name: END_YMD
           attributes:
             type: date
             format: YYYY-MM-DD
           desc: 종료 일자
-          example: 2024-02-16
+          example: '2024-02-16'
         - <<: *RMK_CONT
     400-error:
       type: object
@@ -144,7 +144,7 @@ responses:
             type: date
             format: 'YYYY-MM-DD HH:MM:SS:ms'
           desc: 센서 데이터 수집 시간
-          example: 2023-01-02 00:20:56:200
+          example: '2023-01-02 00:20:56:200'
   # AILM010M01---------------------------------end
   # AILM020M01---------------------------------start
   AILM020M01:
