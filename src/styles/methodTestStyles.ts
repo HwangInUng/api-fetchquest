@@ -57,6 +57,7 @@ export const MethodSelectContainer = styled.div`
     pl-3
     pr-1
     border
+    border-slate-400
     rounded-l-md
     font-bold
     bg-transparent
@@ -89,6 +90,7 @@ export const MethodSelectOptions = styled.div`
     rounded-md
     mt-0.5
     bg-slate-800
+    z-10
   `}
 `;
 
@@ -114,6 +116,7 @@ export const MethodUrlInput = styled.input`
     outline-none
     bg-transparent
     border
+    border-slate-400
     text-sm
     hover:border-blue-700
     hover:shadow-sm
@@ -131,17 +134,20 @@ export const TestFormTabBox = styled.div`
     px-1
     mb-2
   `}
+`;
 
-  .tab-button {
-    ${tw`
-      py-1
-      border-b-2
-      border-orange-600
-      text-sm
-      opacity-70
-      hover:opacity-100
-    `}
-  }
+export const TestFormTabButton = styled.button<{ $isSelect: boolean }>`
+  ${tw`
+    py-1
+    border-b-2
+    border-slate-800
+    text-sm
+    opacity-70
+    hover:opacity-100
+  `}
+
+  ${({ $isSelect }) =>
+    $isSelect ? tw`opacity-100 border-orange-600` : null}
 `;
 
 export const TestFormContainer = styled.div`
@@ -152,6 +158,33 @@ export const TestFormContainer = styled.div`
     border-b-0
     border-slate-600
   `}
+
+  .form-key {
+    ${tw`
+      border-r
+      border-slate-600
+      w-[30%]
+    `}
+  }
+
+  .form-value {
+    ${tw`
+      flex-grow
+      flex
+      justify-between
+      items-center
+      px-2
+    `}
+
+    svg {
+      ${tw`
+        cursor-pointer
+        opacity-60
+        hover:opacity-100
+        text-sm
+      `}
+    }
+  }
 `;
 
 export const TestFormHeader = styled.div`
@@ -170,20 +203,6 @@ export const TestFormHeader = styled.div`
       pl-2
     `}
   }
-
-  .header-key {
-    ${tw`
-      border-r
-      border-slate-600
-      w-[30%]
-    `}
-  }
-
-  .header-value {
-    ${tw`
-      flex-grow
-    `}
-  }
 `;
 
 export const TestFormBody = styled.div`
@@ -195,31 +214,4 @@ export const TestFormBody = styled.div`
     py-2
     items-center
   `}
-
-  .body-key {
-    ${tw`
-      border-r
-      border-slate-600
-      w-[30%]
-      pl-2
-    `}
-  }
-
-  .body-value {
-    ${tw`
-      flex-grow
-      flex
-      justify-between
-      items-center
-      px-2
-    `}
-
-    svg {
-      ${tw`
-        cursor-pointer
-        opacity-60
-        hover:opacity-100
-      `}
-    }
-  }
 `;
