@@ -14,6 +14,7 @@ const TestFormTab = ({
     <TestFormTabBox>
       {TEST_FORM_TABS.map(tab => (
         <TestFormTabButton
+          key={tab}
           $isSelect={isSelect(tab)}
           onClick={() => onClick(tab)}
         >

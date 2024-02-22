@@ -8,7 +8,6 @@ const SideSearchList = () => {
     sideMenuState.searchMethodList,
   );
   const hasData = searchMethodList.length === 0;
-
   const handleSelect = (target: ISideMethod) => {
     resetSearchMethodList([target]);
   };

@@ -5,10 +5,19 @@ import { convertSampleData } from 'utils';
 import MethodInfoRequest from './MethodInfoRequest';
 import MethodInfoResponse from './MethodInfoResponse';
 import { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { methodTestState } from 'atoms';
 
 const MethodSample = ({ method }: { method: ISideMethod }) => {
   const [selectResponseCode, setSelectResponseCode] = useState(200);
   const paramsKeys = Object.keys(method.param);
+  const atomKey = `${method.upperCode}-${method.name}`;
+  const setMethodRawData = useSetRecoilState(
+    methodTestState.methodRawData(atomKey),
+  );
+  const handleMethodRawData = (rawData: string) => {
+    setMethodRawData(rawData);
+  };
   const handleSelectResponseCode = (responseCode: number) => {
     setSelectResponseCode(responseCode);
   };
@@ -23,6 +32,8 @@ const MethodSample = ({ method }: { method: ISideMethod }) => {
           <SampleData
             key={key}
             sampleData={convertSampleData(method.param[key])}
+            type='request'
+            setRawData={handleMethodRawData}
           />
         ))}
       </MethodInfoRequest>
@@ -35,6 +46,7 @@ const MethodSample = ({ method }: { method: ISideMethod }) => {
       >
         <SampleData
           sampleData={convertSampleData(method.res[selectResponseCode])}
+          type='response'
         />
       </MethodInfoResponse>
     </MethodContentBox>

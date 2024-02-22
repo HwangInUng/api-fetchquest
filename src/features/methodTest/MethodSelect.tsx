@@ -12,12 +12,14 @@ interface IRequestMethodType {
   color: string;
 }
 
-const defaultMethod: IRequestMethodType = METHOD_TYPE_BUTTONS[0];
-
-const MethodSelect = () => {
+const MethodSelect = ({ methodType }: { methodType: string }) => {
   const [optionOpen, setOptionOpen] = useState(false);
-  const [selectMethodType, setSelectMethodType] =
-    useState<IRequestMethodType>(defaultMethod);
+  const defaultMethod = METHOD_TYPE_BUTTONS.find(
+    type => type.name === methodType,
+  );
+  const [selectMethodType, setSelectMethodType] = useState<
+    IRequestMethodType | undefined
+  >(defaultMethod);
   const handleOpen = () => {
     setOptionOpen(!optionOpen);
   };
@@ -29,8 +31,8 @@ const MethodSelect = () => {
   return (
     <div className='relative'>
       <MethodSelectContainer onClick={handleOpen}>
-        <span className={selectMethodType.color}>
-          {selectMethodType.name}
+        <span className={selectMethodType?.color}>
+          {selectMethodType?.name}
         </span>
         <BiChevronRight />
       </MethodSelectContainer>

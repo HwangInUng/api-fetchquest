@@ -155,7 +155,6 @@ export const TestFormContainer = styled.div`
     flex
     flex-col
     border
-    border-b-0
     border-slate-600
   `}
 
@@ -163,7 +162,17 @@ export const TestFormContainer = styled.div`
     ${tw`
       border-r
       border-slate-600
+      w-[25%]
+      overflow-hidden
+      `}
+  }
+
+  .form-format {
+    ${tw`
+      border-r
+      border-slate-600
       w-[30%]
+      overflow-hidden
     `}
   }
 
@@ -210,6 +219,7 @@ export const TestFormBody = styled.div`
     flex
     border-b
     border-slate-600
+    last:border-none
     text-[0.8rem]
     py-2
     items-center

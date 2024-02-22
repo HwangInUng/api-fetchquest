@@ -41,7 +41,7 @@ const Content = (): JSX.Element => {
             method={method}
             methodIndex={index}
           />
-          <MethodTest />
+          <MethodTest method={method} />
         </div>
       ))}
     </ContentContainer>

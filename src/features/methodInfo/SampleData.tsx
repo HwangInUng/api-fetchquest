@@ -1,12 +1,18 @@
 import TextCopyButton from 'components/CopyButton';
 import { ISampleData } from 'models';
 import { useState } from 'react';
-import { SamplePre, SampleTitle } from 'styles';
+import { CopyButton, SamplePre, SampleTitle } from 'styles';
 
 const SampleData = ({
   sampleData,
+  type,
+  setRawData = () => {
+    /* empty*/
+  },
 }: {
   sampleData: ISampleData;
+  type: string;
+  setRawData?: (rawData: string) => void;
 }): JSX.Element => {
   const [isOpen, setIsOpen] = useState(true);
   const dataName = isOpen
@@ -24,10 +30,16 @@ const SampleData = ({
       <SampleTitle onClick={handleOpen}>
         <span>{dataName}</span>
       </SampleTitle>
-      <TextCopyButton
-        title='Sample Copy'
-        copyValue={jsonData}
-      />
+      {type === 'request' ? (
+        <CopyButton onClick={() => setRawData(jsonData)}>
+          Sample Copy to Raw
+        </CopyButton>
+      ) : (
+        <TextCopyButton
+          title='Sample Copy to ClipBoard'
+          copyValue={jsonData}
+        />
+      )}
       {isOpen && <SamplePre>{jsonData}</SamplePre>}
     </div>
   );

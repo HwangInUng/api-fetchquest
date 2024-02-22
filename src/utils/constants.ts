@@ -26,4 +26,4 @@ export const METHOD_TYPE_BUTTONS: { name: string; color: string }[] = [
   { name: 'DELETE', color: 'text-purple-400' },
 ];
 
-export const TEST_FORM_TABS: string[] = ['Params', 'raw'];
+export const TEST_FORM_TABS: string[] = ['Params', 'Raw'];
