@@ -1,5 +1,6 @@
 import { IData } from './methodInterfaces';
 
+// default SideMethod를 생성하고 extends로 처리 필요
 export interface IInitialSideMethod {
   name: string;
   method: 'get' | 'post' | 'put' | 'delete';
@@ -22,20 +23,12 @@ export interface ISideMethod {
   res: { [key: number]: IData };
 }
 
-export interface ISideMethodProps {
-  methods?: IInitialSideMethod[];
-}
-
 export interface ISideCategory {
   code: string;
   name: string;
   upperCode: string;
   upperName: string;
   methods?: IInitialSideMethod[];
-}
-
-export interface ISideCategoryProps {
-  categories: ISideCategory[];
 }
 
 export interface IDomainList {

@@ -1,16 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import TestForm from './TestForm';
 import TestFormTab from './TestFormTab';
 import { ISideMethod } from 'models';
-import { useRecoilValue } from 'recoil';
-import { methodTestState } from 'atoms';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { methodState } from 'atoms';
 
 const MethodTestForm = ({ method }: { method: ISideMethod }) => {
-  const [selectFormTab, setSelectFormTab] = useState('Params');
   const atomKey = `${method.upperCode}-${method.name}`;
-  const methodRawData = useRecoilValue(
-    methodTestState.methodRawData(atomKey),
+  const [selectFormTab, setSelectFormTab] = useRecoilState(
+    methodState.currentFormTab(atomKey),
   );
+  const methodType = method.method.toLocaleUpperCase();
+  const methodRawData = useRecoilValue(methodState.methodRawData(atomKey));
   const handleSelect = (formTab: string) => {
     setSelectFormTab(formTab);
   };
@@ -19,6 +20,7 @@ const MethodTestForm = ({ method }: { method: ISideMethod }) => {
     name: field.name,
     example: field.example,
     format: field.attributes.format,
+    type: field.attributes.type,
   }));
 
   useEffect(() => {
@@ -34,9 +36,11 @@ const MethodTestForm = ({ method }: { method: ISideMethod }) => {
         onClick={handleSelect}
       />
       <TestForm
+        methodType={methodType}
         selectFormTab={selectFormTab}
         methodRawData={methodRawData}
         formValues={formValues}
+        atomKey={atomKey}
       />
     </div>
   );

@@ -220,7 +220,7 @@ export const TestFormBody = styled.div`
     border-b
     border-slate-600
     last:border-none
-    text-[0.8rem]
+    text-[0.7rem]
     py-2
     items-center
   `}

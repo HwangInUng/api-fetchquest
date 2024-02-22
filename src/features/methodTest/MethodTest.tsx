@@ -19,12 +19,12 @@ const sample = `[
 const MethodTest = ({ method }: { method: ISideMethod }) => {
   return (
     <MethodTestContainer>
-      <div className='h-1/2 flex flex-col gap-y-3'>
+      <div className='flex flex-col gap-y-3 mb-3'>
         <h2>Request</h2>
         <MethodActionBox method={method} />
         <MethodTestForm method={method} />
       </div>
-      <div className='h-1/2'>
+      <div className='flex-grow'>
         <h2>Response</h2>
         <div className='mt-2 border border-slate-500 p-2 rounded-md text-sm'>
           <pre>{sample}</pre>

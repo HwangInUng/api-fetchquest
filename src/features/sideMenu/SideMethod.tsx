@@ -1,8 +1,12 @@
 import { sideMenuState } from 'atoms';
-import { ISideMethodProps } from 'models';
+import { IInitialSideMethod } from 'models';
 import { useRecoilState } from 'recoil';
 import { SideMethodBox } from 'styles';
 import { SIDE_METHOD_COLOR, onMoveToScroll } from 'utils';
+
+interface ISideMethodProps {
+  methods?: IInitialSideMethod[];
+}
 
 const SideMethod = ({ methods = [] }: ISideMethodProps): JSX.Element => {
   const [selectMethod, setSelectMethod] = useRecoilState(

@@ -1,9 +1,13 @@
 import { BiSolidChevronRight } from 'react-icons/bi';
 import SideMethod from './SideMethod';
-import { ISideCategoryProps } from 'models';
 import { useRecoilState } from 'recoil';
 import { sideMenuState } from 'atoms';
 import { SideCategoryBox } from 'styles';
+import { ISideCategory } from 'models';
+
+interface ISideCategoryProps {
+  categories: ISideCategory[];
+}
 
 const SideCategory = ({ categories }: ISideCategoryProps): JSX.Element => {
   const [selectCategory, setSelectCategory] = useRecoilState(

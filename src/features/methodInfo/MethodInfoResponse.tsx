@@ -1,6 +1,13 @@
-import { IInfoResponseProps } from 'models';
 import { DetailResponseButton, MethodContentWrapper } from 'styles';
 import { ERROR_CODE_TEXT } from 'utils';
+import { IMethodInfoProps } from './MethodInfoRequest';
+import { IData } from 'models';
+
+export interface IInfoResponseProps extends IMethodInfoProps {
+  responses: { [key: number]: IData };
+  selectResponseCode: number;
+  setselectResponseCode: (responseCode: number) => void;
+}
 
 const MethodInfoResponse = ({
   children,

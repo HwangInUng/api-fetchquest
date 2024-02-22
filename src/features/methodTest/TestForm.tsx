@@ -1,32 +1,42 @@
+import { methodState } from 'atoms';
 import {
   ChangeInputEvent,
   ChangeTextAreaEvent,
   CommonObject,
+  ITestFormValues,
 } from 'models';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { BiEdit, BiRefresh } from 'react-icons/bi';
+import { useRecoilState } from 'recoil';
 import { TestFormBody, TestFormContainer, TestFormHeader } from 'styles';
 
+interface ITestFormProps {
+  methodType: string;
+  selectFormTab: string;
+  methodRawData: string;
+  formValues: ITestFormValues[];
+  atomKey: string;
+}
+
 const TestForm = ({
+  methodType,
   selectFormTab,
   methodRawData,
   formValues,
-}: {
-  selectFormTab: string;
-  methodRawData: string;
-  formValues: {
-    name: string;
-    example: string | number | undefined;
-    format: string | undefined;
-  }[];
-}) => {
-  const [rawData, setRawData] = useState('');
+  atomKey,
+}: ITestFormProps) => {
+  const [rawData, setRawData] = useRecoilState(
+    methodState.currentFieldRaw(atomKey),
+  );
   const defaultValues = formValues.reduce((acc, current) => {
     acc = { ...acc, [current.name]: current.example };
     return acc;
   }, {});
-  const [fieldValues, setFieldValues] =
-    useState<CommonObject>(defaultValues);
+  const [fieldValues, setFieldValues] = useRecoilState<CommonObject>(
+    methodState.currentFieldParam(atomKey),
+  );
+  const isPost = methodType === 'POST';
+
   const handleRawData = (e: ChangeTextAreaEvent) => {
     setRawData(e.target.value);
   };
@@ -50,6 +60,10 @@ const TestForm = ({
   };
 
   useEffect(() => {
+    setFieldValues(defaultValues);
+  }, [setFieldValues]);
+
+  useEffect(() => {
     setRawData(methodRawData);
   }, [methodRawData]);
 
@@ -57,30 +71,40 @@ const TestForm = ({
     <>
       {selectFormTab === 'Params' ? (
         <TestFormContainer>
-          <TestFormHeader>
-            <div className='form-key'>Key</div>
-            <div className='form-format'>Format</div>
-            <div className='form-value'>
-              <span>Value</span>
-              <BiRefresh onClick={handleReset} />
+          {isPost ? (
+            <div className='py-10 text-center text-sm'>
+              this method not available
             </div>
-          </TestFormHeader>
-          {formValues.map(field => (
-            <TestFormBody key={field.name}>
-              <div className='form-key pl-2'>{field.name}</div>
-              <div className='form-format pl-2'>{field.format || '-'}</div>
-              <div className='form-value'>
-                <input
-                  type='text'
-                  name={field.name}
-                  value={fieldValues[field.name]}
-                  onChange={editParamValues}
-                  className='w-full bg-transparent outline-none'
-                />
-                <BiEdit onClick={() => handleEdit(field.name)} />
-              </div>
-            </TestFormBody>
-          ))}
+          ) : (
+            <>
+              <TestFormHeader>
+                <div className='form-key'>Key</div>
+                <div className='form-format'>Format</div>
+                <div className='form-value'>
+                  <span>Value</span>
+                  <BiRefresh onClick={handleReset} />
+                </div>
+              </TestFormHeader>
+              {formValues.map(field => (
+                <TestFormBody key={field.name}>
+                  <div className='form-key pl-2'>{field.name}</div>
+                  <div className='form-format pl-2'>
+                    {field.format || '-'}
+                  </div>
+                  <div className='form-value'>
+                    <input
+                      type={field.type}
+                      name={field.name}
+                      value={fieldValues[field.name] || ''}
+                      onChange={editParamValues}
+                      className='w-full bg-transparent outline-none'
+                    />
+                    <BiEdit onClick={() => handleEdit(field.name)} />
+                  </div>
+                </TestFormBody>
+              ))}
+            </>
+          )}
         </TestFormContainer>
       ) : (
         <div className='mt-2'>

@@ -1,5 +1,11 @@
-import { IMethodInfoProps } from 'models';
+import { ReactNode } from 'react';
 import { MethodContentWrapper } from 'styles';
+
+export interface IMethodInfoProps {
+  children: ReactNode;
+  title: string;
+  type: string;
+}
 
 const MethodInfoRequest = ({
   children,

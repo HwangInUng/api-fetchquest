@@ -6,14 +6,14 @@ import MethodInfoRequest from './MethodInfoRequest';
 import MethodInfoResponse from './MethodInfoResponse';
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { methodTestState } from 'atoms';
+import { methodState } from 'atoms';
 
 const MethodSample = ({ method }: { method: ISideMethod }) => {
   const [selectResponseCode, setSelectResponseCode] = useState(200);
   const paramsKeys = Object.keys(method.param);
   const atomKey = `${method.upperCode}-${method.name}`;
   const setMethodRawData = useSetRecoilState(
-    methodTestState.methodRawData(atomKey),
+    methodState.methodRawData(atomKey),
   );
   const handleMethodRawData = (rawData: string) => {
     setMethodRawData(rawData);
