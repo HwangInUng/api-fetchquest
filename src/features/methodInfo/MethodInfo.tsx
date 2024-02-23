@@ -24,7 +24,7 @@ const MethodInfo = ({
         </div>
         <MethodDescription
           description={method.description}
-          url='test'
+          url={method.url}
         />
         <MethodDetail method={method} />
         <MethodSample method={method} />

@@ -31,7 +31,7 @@ const MethodActionBox = ({ method }: { method: ISideMethod }) => {
     <MethodActionContainer>
       <div className='field-box'>
         <MethodSelect methodType={upperCaseMethodType} />
-        <MethodUrl url='/api/AIBI040M01/processCode' />
+        <MethodUrl url={method.url} />
       </div>
       <div>
         <button

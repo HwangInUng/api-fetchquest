@@ -7,7 +7,7 @@ export interface IInitialSideMethod {
   description: string[];
   upperCode: string;
   upperName: string;
-  url?: string;
+  url: string;
   param: { name: string }[];
   res: { code: number; name: string }[];
 }
@@ -18,7 +18,7 @@ export interface ISideMethod {
   description: string[];
   upperCode: string;
   upperName: string;
-  url?: string;
+  url: string;
   param: { [key: string]: IData };
   res: { [key: number]: IData };
 }

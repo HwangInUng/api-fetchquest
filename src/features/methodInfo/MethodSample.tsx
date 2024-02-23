@@ -1,4 +1,4 @@
-import { MethodContentBox } from 'styles';
+import { CopyButton, MethodContentBox } from 'styles';
 import SampleData from './SampleData';
 import { ISideMethod } from 'models';
 import { convertSampleData } from 'utils';
@@ -7,6 +7,8 @@ import MethodInfoResponse from './MethodInfoResponse';
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { methodState } from 'atoms';
+import TextCopyButton from 'components/CopyButton';
+import { convertJson, convertParamToRawData } from 'utils/convertHelper';
 
 const MethodSample = ({ method }: { method: ISideMethod }) => {
   const [selectResponseCode, setSelectResponseCode] = useState(200);
@@ -15,6 +17,11 @@ const MethodSample = ({ method }: { method: ISideMethod }) => {
   const setMethodRawData = useSetRecoilState(
     methodState.methodRawData(atomKey),
   );
+  const paramRawData = convertParamToRawData(method.param);
+  const responseSampleData = convertSampleData(
+    method.res[selectResponseCode],
+  );
+  const jsonResponseSample = convertJson(responseSampleData.fields);
   const handleMethodRawData = (rawData: string) => {
     setMethodRawData(rawData);
   };
@@ -28,12 +35,13 @@ const MethodSample = ({ method }: { method: ISideMethod }) => {
         title='Request Sample'
         type='sample'
       >
+        <CopyButton onClick={() => handleMethodRawData(paramRawData)}>
+          Copy to Raw
+        </CopyButton>
         {paramsKeys.map(key => (
           <SampleData
             key={key}
             sampleData={convertSampleData(method.param[key])}
-            type='request'
-            setRawData={handleMethodRawData}
           />
         ))}
       </MethodInfoRequest>
@@ -44,10 +52,11 @@ const MethodSample = ({ method }: { method: ISideMethod }) => {
         selectResponseCode={selectResponseCode}
         setselectResponseCode={handleSelectResponseCode}
       >
-        <SampleData
-          sampleData={convertSampleData(method.res[selectResponseCode])}
-          type='response'
+        <TextCopyButton
+          title='Copy To ClipBoard'
+          copyValue={jsonResponseSample}
         />
+        <SampleData sampleData={responseSampleData} />
       </MethodInfoResponse>
     </MethodContentBox>
   );

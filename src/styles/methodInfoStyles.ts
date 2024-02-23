@@ -118,6 +118,7 @@ export const MethodContentWrapper = styled.div`
 
   .content-box {
     ${tw`
+      relative
       h-[400px]
       space-y-2
       p-3

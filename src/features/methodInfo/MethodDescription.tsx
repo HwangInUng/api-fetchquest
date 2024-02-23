@@ -8,15 +8,14 @@ const MethodDescription = ({
   description: string[];
   url: string;
 }) => {
-  console.log(url);
   return (
     <MethodDescriptionBox>
       <ul className='list'>
         <li className='relative'>
-          <span>{'URL : /api/AIPM030M03/sensor'}</span>
+          <span>{`URL : ${url}`}</span>
           <TextCopyButton
             title='URL Copy'
-            copyValue='/api/AIPM030M03/sensor'
+            copyValue={url}
           />
         </li>
         {description.map((desc, index) => (

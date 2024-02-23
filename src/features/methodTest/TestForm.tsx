@@ -6,36 +6,35 @@ import {
   ITestFormValues,
 } from 'models';
 import { useEffect } from 'react';
-import { BiEdit, BiRefresh } from 'react-icons/bi';
+import { BiRefresh } from 'react-icons/bi';
 import { useRecoilState } from 'recoil';
-import { TestFormBody, TestFormContainer, TestFormHeader } from 'styles';
+import { TestFormContainer, TestFormHeader } from 'styles';
+import { convertFormToFieldValues } from 'utils/convertHelper';
+import TestRaw from './TestRaw';
+import TestFormBody from './TestFormBody';
 
 interface ITestFormProps {
-  methodType: string;
   selectFormTab: string;
   methodRawData: string;
   formValues: ITestFormValues[];
   atomKey: string;
+  unusableParam: boolean;
 }
 
 const TestForm = ({
-  methodType,
   selectFormTab,
   methodRawData,
   formValues,
   atomKey,
+  unusableParam,
 }: ITestFormProps) => {
   const [rawData, setRawData] = useRecoilState(
     methodState.currentFieldRaw(atomKey),
   );
-  const defaultValues = formValues.reduce((acc, current) => {
-    acc = { ...acc, [current.name]: current.example };
-    return acc;
-  }, {});
+  const defaultValues = convertFormToFieldValues(formValues);
   const [fieldValues, setFieldValues] = useRecoilState<CommonObject>(
     methodState.currentFieldParam(atomKey),
   );
-  const isPost = methodType === 'POST';
 
   const handleRawData = (e: ChangeTextAreaEvent) => {
     setRawData(e.target.value);
@@ -71,9 +70,9 @@ const TestForm = ({
     <>
       {selectFormTab === 'Params' ? (
         <TestFormContainer>
-          {isPost ? (
-            <div className='py-10 text-center text-sm'>
-              this method not available
+          {unusableParam ? (
+            <div className='unusable'>
+              파라미터가 2개 이상인 경우 Raw를 이용하세요.
             </div>
           ) : (
             <>
@@ -86,36 +85,22 @@ const TestForm = ({
                 </div>
               </TestFormHeader>
               {formValues.map(field => (
-                <TestFormBody key={field.name}>
-                  <div className='form-key pl-2'>{field.name}</div>
-                  <div className='form-format pl-2'>
-                    {field.format || '-'}
-                  </div>
-                  <div className='form-value'>
-                    <input
-                      type={field.type}
-                      name={field.name}
-                      value={fieldValues[field.name] || ''}
-                      onChange={editParamValues}
-                      className='w-full bg-transparent outline-none'
-                    />
-                    <BiEdit onClick={() => handleEdit(field.name)} />
-                  </div>
-                </TestFormBody>
+                <TestFormBody
+                  key={field.name}
+                  field={field}
+                  value={fieldValues[field.name] || ''}
+                  onChange={editParamValues}
+                  onClick={handleEdit}
+                />
               ))}
             </>
           )}
         </TestFormContainer>
       ) : (
-        <div className='mt-2'>
-          <textarea
-            className='w-full h-[400px] bg-transparent border border-slate-500 rounded-md resize-none outline-none py-1 px-2 text-sm'
-            value={rawData}
-            onChange={handleRawData}
-            autoComplete='off'
-            spellCheck='false'
-          />
-        </div>
+        <TestRaw
+          value={rawData}
+          onChange={handleRawData}
+        />
       )}
     </>
   );

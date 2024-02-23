@@ -15,6 +15,17 @@ export const MethodTestContainer = styled.div`
   `}
 `;
 
+export const MethodPreContainer = styled.div`
+  ${tw`
+    mt-2
+    border
+    border-slate-500
+    p-2
+    rounded-md
+    text-sm
+  `}
+`;
+
 export const MethodActionContainer = styled.div`
   ${tw`
     flex
@@ -194,6 +205,14 @@ export const TestFormContainer = styled.div`
       `}
     }
   }
+
+  .unusable {
+    ${tw`
+      py-10
+      text-center
+      text-sm
+    `}
+  }
 `;
 
 export const TestFormHeader = styled.div`
@@ -214,7 +233,7 @@ export const TestFormHeader = styled.div`
   }
 `;
 
-export const TestFormBody = styled.div`
+export const TestFormRow = styled.div`
   ${tw`
     flex
     border-b
@@ -224,4 +243,27 @@ export const TestFormBody = styled.div`
     py-2
     items-center
   `}
+`;
+
+export const TestRawContainer = styled.div`
+  ${tw`
+    mt-2
+  `}
+
+  textarea {
+    ${`
+      w-full
+      min-h-[200px]
+      max-h-[400px]
+      bg-transparent
+      border
+      border-slate-500
+      rounded-md
+      resize-none
+      outline-none
+      py-1
+      px-2
+      text-sm
+    `}
+  }
 `;

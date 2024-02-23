@@ -4,24 +4,21 @@ import TestFormTab from './TestFormTab';
 import { ISideMethod } from 'models';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { methodState } from 'atoms';
+import { convertFieldToFormValues } from 'utils/convertHelper';
 
 const MethodTestForm = ({ method }: { method: ISideMethod }) => {
   const atomKey = `${method.upperCode}-${method.name}`;
   const [selectFormTab, setSelectFormTab] = useRecoilState(
     methodState.currentFormTab(atomKey),
   );
-  const methodType = method.method.toLocaleUpperCase();
   const methodRawData = useRecoilValue(methodState.methodRawData(atomKey));
+  const formValues = convertFieldToFormValues(method.param);
+  const isPost = method.method === 'post';
+  const multiParam = Object.keys(method.param).length > 1;
+
   const handleSelect = (formTab: string) => {
     setSelectFormTab(formTab);
   };
-  const methodParam = Object.keys(method.param)[0];
-  const formValues = method.param[methodParam].fields.map(field => ({
-    name: field.name,
-    example: field.example,
-    format: field.attributes.format,
-    type: field.attributes.type,
-  }));
 
   useEffect(() => {
     if (methodRawData) {
@@ -36,11 +33,11 @@ const MethodTestForm = ({ method }: { method: ISideMethod }) => {
         onClick={handleSelect}
       />
       <TestForm
-        methodType={methodType}
         selectFormTab={selectFormTab}
         methodRawData={methodRawData}
         formValues={formValues}
         atomKey={atomKey}
+        unusableParam={isPost && multiParam}
       />
     </div>
   );
