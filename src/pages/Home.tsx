@@ -18,6 +18,9 @@ const Home = () => {
   );
 
   useEffect(() => {
+    const accessToken = sessionStorage.getItem('accessToken');
+    if (!accessToken) window.location.href = 'login';
+
     const fetchSideMenus = async () => {
       const domainData = await fetchYaml('./yaml/domain.yaml');
       const paramData = await fetchYaml('./yaml/param.yaml');

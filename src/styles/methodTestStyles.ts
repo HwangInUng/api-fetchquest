@@ -251,7 +251,7 @@ export const TestRawContainer = styled.div`
   `}
 
   textarea {
-    ${`
+    ${tw`
       w-full
       min-h-[200px]
       max-h-[400px]

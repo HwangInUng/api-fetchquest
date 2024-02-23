@@ -9,7 +9,7 @@ const TextCopyButton = ({
 }) => {
   const handleCopy = async () => {
     await navigator.clipboard.writeText(copyValue);
-    alert('샘플 데이터가 클립보드에 복사되었습니다.');
+    alert('클립보드에 복사되었습니다.');
   };
   return <CopyButton onClick={handleCopy}>{title}</CopyButton>;
 };
